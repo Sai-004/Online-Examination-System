@@ -1,0 +1,9 @@
+C:\projects_vs\dataBaseConnection\dataBaseConnection\bin\Debug\dataBaseConnection.exe
+C:\projects_vs\dataBaseConnection\dataBaseConnection\bin\Debug\dataBaseConnection.pdb
+C:\projects_vs\dataBaseConnection\dataBaseConnection\bin\Debug\dataBaseConnection.xml
+C:\projects_vs\dataBaseConnection\dataBaseConnection\obj\x86\Debug\dataBaseConnection.Form1.resources
+C:\projects_vs\dataBaseConnection\dataBaseConnection\obj\x86\Debug\dataBaseConnection.Resources.resources
+C:\projects_vs\dataBaseConnection\dataBaseConnection\obj\x86\Debug\dataBaseConnection.vbproj.GenerateResource.Cache
+C:\projects_vs\dataBaseConnection\dataBaseConnection\obj\x86\Debug\dataBaseConnection.exe
+C:\projects_vs\dataBaseConnection\dataBaseConnection\obj\x86\Debug\dataBaseConnection.xml
+C:\projects_vs\dataBaseConnection\dataBaseConnection\obj\x86\Debug\dataBaseConnection.pdb
