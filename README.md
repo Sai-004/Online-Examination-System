@@ -7,3 +7,4 @@ CS-346 Assignment-2 Online Examination System
 4.Admin when entered for the first time,asking him the exam pattern.  
 5.Admin when entered not the first time,asking him whether he wants to do question pool management or view student results or release the test results of students whose results weren't released.  
 6.Students results page for Admin.  
+7.Question Pool management (2 or 3 pages for add,delete ,edit).  
