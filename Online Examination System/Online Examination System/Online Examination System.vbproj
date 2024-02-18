@@ -72,6 +72,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="certificate.Designer.vb">
+      <DependentUpon>certificate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="certificate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ExamForm.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -94,8 +100,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="student_profile.Designer.vb">
+      <DependentUpon>student_profile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="student_profile.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="certificate.resx">
+      <DependentUpon>certificate.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExamForm.resx">
       <DependentUpon>ExamForm.vb</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +119,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="student_profile.resx">
+      <DependentUpon>student_profile.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

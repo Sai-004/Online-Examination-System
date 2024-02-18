@@ -109,20 +109,6 @@ Public Class Form1
         currentQuestionId = questionId
         DisplayQuestionText(questionId)
         DisplayOptions(questionId)
-
-        ' Disable the clicked button
-        questionButton.Enabled = False
-
-        ' Enable all other question buttons
-        For Each ctrl As Control In SplitContainer1.Panel1.Controls
-            If TypeOf ctrl Is TableLayoutPanel Then
-                For Each btn As Control In ctrl.Controls
-                    If TypeOf btn Is Button AndAlso btn IsNot questionButton Then
-                        btn.Enabled = True
-                    End If
-                Next
-            End If
-        Next
     End Sub
 
 
@@ -172,5 +158,9 @@ Public Class Form1
         ' Enable or disable the buttons based on question availability
         PrevBtn.Enabled = questionTextsByQuestionId.ContainsKey(currentQuestionId - 1)
         SaveBtn.Enabled = True
+    End Sub
+    Private Sub SubmitBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SubmitBtn.Click
+        Dim newform As New student_profile()
+        newform.Show()
     End Sub
 End Class

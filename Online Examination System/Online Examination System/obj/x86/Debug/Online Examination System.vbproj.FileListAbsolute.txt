@@ -7,3 +7,5 @@ C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-Syste
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.exe
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.xml
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.pdb
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.Certificate.resources
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.student_profile.resources
