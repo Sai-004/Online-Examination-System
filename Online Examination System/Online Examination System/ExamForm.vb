@@ -159,8 +159,28 @@ Public Class Form1
         PrevBtn.Enabled = questionTextsByQuestionId.ContainsKey(currentQuestionId - 1)
         SaveBtn.Enabled = True
     End Sub
+
     Private Sub SubmitBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SubmitBtn.Click
         Dim newform As New student_profile()
         newform.Show()
+    End Sub
+
+    Private tt As Integer = 1
+    Private ss As Integer = 59
+    Private vv As Integer = 0
+
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        If vv > 0 Or tt > 0 Or ss > 0 Then
+            timer_count.Text = Format(tt, "00:") & Format(ss, "00")
+            ss = ss - 1
+            If ss < 0 Then
+                ss = 59
+                tt = tt - 1
+            End If
+        Else
+            timer_count.Text = "00:00"
+            timer_count.Enabled = False
+            ' MessageBox.Show("Time Ended")
+        End If
     End Sub
 End Class
