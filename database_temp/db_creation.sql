@@ -56,6 +56,7 @@ CREATE TABLE admin (
     email_id VARCHAR(255),
     password VARCHAR(255),
     sections INT,
+    entered BOOLEAN default 0,
     FOREIGN KEY (sections) REFERENCES section(section_id)
 );
 
