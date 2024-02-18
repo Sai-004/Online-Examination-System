@@ -1,12 +1,14 @@
-Imports System.Data.Odbc
-
+﻿Imports System.Data.Odbc
+'This form should open only when admin comes first time
 Public Class Form1
     Dim connString As String = "DSN=oee;Uid=root;Pwd=2004;"
     Dim conn As New OdbcConnection(connString)
     Dim numberOfSections As Integer
     Dim numberOfQuestions As New List(Of Integer)
+    Dim marksOfSections As New List(Of Integer)
     Dim enteredSections As Boolean = False
     Dim enteredNumberOfQuestions As Boolean = False
+    Dim enteredMarks As Boolean = False
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         'Load data or perform other tasks when the form loads
         Try
@@ -75,9 +77,14 @@ Public Class Form1
 
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
-        If (enteredNumberOfQuestions = True And enteredSections = True) Then
+        If (enteredNumberOfQuestions = True And enteredSections = True And enteredMarks = True) Then
             If Not (numberOfSections = numberOfQuestions.Count) Then
                 MessageBox.Show("The Entered number of questions in each section doesn't match number of sections", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Close()
+                Exit Sub
+            End If
+            If Not (numberOfSections = marksOfSections.Count) Then
+                MessageBox.Show("The Entered marks in each section doesn't match number of sections", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Close()
                 Exit Sub
             End If
@@ -87,30 +94,40 @@ Public Class Form1
                 Exit Sub
             End If
             For i As Integer = 0 To numberOfSections - 1
-                If numberOfQuestions(i) = 0 Then
-                    MessageBox.Show("Number of questions in any section cannot be 0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                If numberOfQuestions(i) <= 0 Then
+                    MessageBox.Show("Number of questions in any section cannot be 0 or less than 0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Me.Close()
                     Exit Sub
                 End If
             Next
             Button5.Enabled = False
             'storing the correct values in table in the database
+            'admin table altering sections
             Try
                 conn.Open()
-                Dim integerString As String = String.Join(",", numberOfQuestions)
-                'MessageBox.Show(integerString)
-                'To delete previous entries if present
-                Dim queryToDelete As String = "delete from numberOfQuestions"
-                Dim cmd1 As New OdbcCommand(queryToDelete, conn)
-                cmd1.ExecuteNonQuery()
-                'inserted the values in the table
-                Dim query As String = "INSERT INTO numberOfQuestions (sections, questions) VALUES (?, ?)"
-                Dim cmd As New OdbcCommand(query, conn)
-                ' Parameters
-                cmd.Parameters.AddWithValue("@numberOfSections", numberOfSections)
-                cmd.Parameters.AddWithValue("@integerString", integerString)
-                ' Execute query
-                cmd.ExecuteNonQuery()
+                Dim updateQuery As String = "UPDATE admin SET sections = ? WHERE admin_id = 1"
+                Using cmdUpdate As New OdbcCommand(updateQuery, conn)
+                    ' Set parameter for the new value of sections
+                    cmdUpdate.Parameters.AddWithValue("@sections", numberOfSections)
+                    ' Execute the UPDATE query
+                    cmdUpdate.ExecuteNonQuery()
+                    MessageBox.Show("Admin table updated successfully.")
+                End Using
+                'section table adding all necessary values
+                Dim deleteQuery As String = "delete from section"
+                Using cmdDelete As New OdbcCommand(deleteQuery, conn)
+                    cmdDelete.ExecuteNonQuery()
+                End Using
+                For i As Integer = 1 To numberOfSections Step 1
+                    Dim insertQuery As String = "insert into section(section_id,section_name,no_of_qs,marks) values (?,?,?,?)"
+                    Using cmdInsert As New OdbcCommand(insertQuery, conn)
+                        cmdInsert.Parameters.AddWithValue("@section_id", i)
+                        cmdInsert.Parameters.AddWithValue("@section_name", "section " & i.ToString())
+                        cmdInsert.Parameters.AddWithValue("@no_of_qs", numberOfQuestions(i - 1))
+                        cmdInsert.Parameters.AddWithValue("@marks", marksOfSections(i - 1))
+                        cmdInsert.ExecuteNonQuery()
+                    End Using
+                Next
             Catch ex As Exception
                 MessageBox.Show("Error connecting to database: " & ex.Message)
             Finally
@@ -118,6 +135,28 @@ Public Class Form1
             End Try
             'Load next form where question pool management is done
             ''''''''''''''''''''''''''''''''''''''''''''''
+            Dim Form4 As New Form4()
+            Form4.Show()
+            Me.Hide()
         End If
+    End Sub
+
+    Private Sub Button6_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button6.Click
+        Dim lines() As String = RichTextBox3.Lines
+        For i As Integer = 0 To lines.Length - 1
+            Dim marks As Integer
+            If Not Integer.TryParse(lines(i).Trim(), marks) Then
+                MessageBox.Show("Invalid input for the number of marks in section " & (i + 1) & ".")
+                Exit Sub
+            End If
+            ' Add the number of questions to the list
+            marksOfSections.Add(marks)
+        Next
+        enteredMarks = True
+        RichTextBox3.ReadOnly = True
+    End Sub
+
+    Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
+        RichTextBox3.Text = ""
     End Sub
 End Class

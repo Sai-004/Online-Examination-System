@@ -7,16 +7,17 @@ Public Class Form4
     Dim conn As New OdbcConnection(connString)
     Dim numberOfSections As Integer
     Dim numberOfQuestions As New List(Of Integer)
+    Dim marksOfSections As New List(Of Integer)
+    Dim sectionNames As New List(Of String)
     Dim currentQuestion As String = ""
     Private sectionData As New List(Of Tuple(Of String, Integer))
     Private Sub Form4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Panel1.AutoScroll = True
-        Dim questionsString As String
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Try
             'to fill the variables numberOfSections and numberOfQuestions from database
             conn.Open()
-            Dim query As String = "SELECT sections, questions FROM numberOfQuestions"
+            Dim query As String = "SELECT sections from admin"
             Dim cmd As New OdbcCommand(query, conn)
             ' Execute the query
             Dim reader As OdbcDataReader = cmd.ExecuteReader()
@@ -26,66 +27,76 @@ Public Class Form4
                 ' Retrieve sections into numberOfSections variable
                 numberOfSections = reader.GetInt32(0)
                 ' Retrieve questions into a string
-                questionsString = reader.GetString(1)
-                ' Parse the string of integers into a list of integers
-                Dim integerStrings() As String = questionsString.Split(","c)
-                For Each intString As String In integerStrings
-                    Dim intValue As Integer
-                    If Integer.TryParse(intString, intValue) Then
-                        numberOfQuestions.Add(intValue)
-                    Else
-                        MessageBox.Show("Error parsing the string of number of questions", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Next
-                ' Now you have the numberOfSections and listOfIntegers
-                'MessageBox.Show("numberOfSections: " & numberOfSections.ToString() & vbCrLf &
-                '"numberOfQuestions: " & String.Join(",", numberOfQuestions))
             Else
                 MessageBox.Show("No data retrieved.")
             End If
+            reader.Close()
+
+            Dim selectQuery As String = "SELECT section_name, no_of_qs,marks FROM section"
+            Using cmdSelect As New OdbcCommand(selectQuery, conn)
+                ' Execute the SELECT query and get the data reader
+                Dim reader2 As OdbcDataReader = cmdSelect.ExecuteReader()
+
+                ' Read data from the data reader
+                While reader2.Read()
+                    ' Read section name and number of questions
+                    Dim sectionName As String = reader2("section_name").ToString()
+                    Dim numberOfQs As Integer = Convert.ToInt32(reader2("no_of_qs"))
+                    Dim marks As Integer = Convert.ToInt32(reader2("marks"))
+                    ' Add section name and number of questions to the lists
+                    sectionNames.Add(sectionName)
+                    numberOfQuestions.Add(numberOfQs)
+                    marksOfSections.Add(marks)
+                End While
+
+                ' Close the data reader
+                reader2.Close()
+            End Using
         Catch ex As Exception
 
         Finally
             conn.Close()
         End Try
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        MessageBox.Show("You must (atleast) enter " & questionsString & " questions in each of the sections respectively, else default values would be set", "information")
         'Filling the table with random questions
-        Dim truncateQuery As String = "TRUNCATE TABLE quiz_questions"
-        Dim insertQuery As String = "INSERT INTO quiz_questions (section_id, question_id, question_text, option_a, option_b, option_c, option_d, correct_option) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-
+        Dim truncateQuery As String = "delete from question_pool"
+        Dim insertQuery As String = "insert into question_pool(question_id,section_id, question,answer, option1, option2, option3, option4) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        'MessageBox.Show("Reached here")
         Try
+            'MessageBox.Show("hi1")
             conn.Open()
+            'MessageBox.Show("hi2")
             Using cmdTruncate As New OdbcCommand(truncateQuery, conn)
                 cmdTruncate.ExecuteNonQuery()
             End Using
-
+            'MessageBox.Show("hello")
+            MessageBox.Show(sectionNames.Count())
+            MessageBox.Show("number of questions array count" & numberOfQuestions.Count())
             ' Create the command object for inserting questions
             Using cmdInsert As New OdbcCommand(insertQuery, conn)
                 ' Loop through sections and questions to insert sample data
                 For section As Integer = 1 To numberOfSections
                     For questionId As Integer = 1 To numberOfQuestions(section - 1)
                         ' Sample question text and options
-                        Dim questionText As String = "Sample question for Section " & section & ", Question " & questionId
+                        Dim questionText As String = "Sample question for " & sectionNames(section - 1) & ", Question " & questionId
                         Dim optionA As String = "Option A"
                         Dim optionB As String = "Option B"
                         Dim optionC As String = "Option C"
                         Dim optionD As String = "Option D"
-                        Dim correctOption As String = "Option A" ' Change as needed
-
+                        Dim correctOption As String = "Option A"
+                        'MessageBox.Show("insertions completed")
                         ' Set parameters for the insert query
-                        cmdInsert.Parameters.AddWithValue("@section_id", section)
                         cmdInsert.Parameters.AddWithValue("@question_id", questionId)
-                        cmdInsert.Parameters.AddWithValue("@question_text", questionText)
-                        cmdInsert.Parameters.AddWithValue("@option_a", optionA)
-                        cmdInsert.Parameters.AddWithValue("@option_b", optionB)
-                        cmdInsert.Parameters.AddWithValue("@option_c", optionC)
-                        cmdInsert.Parameters.AddWithValue("@option_d", optionD)
-                        cmdInsert.Parameters.AddWithValue("@correct_option", correctOption)
-
+                        cmdInsert.Parameters.AddWithValue("@section_id", section)
+                        cmdInsert.Parameters.AddWithValue("@question", questionText)
+                        cmdInsert.Parameters.AddWithValue("@answer", correctOption)
+                        cmdInsert.Parameters.AddWithValue("@option1", optionA)
+                        cmdInsert.Parameters.AddWithValue("@option2", optionB)
+                        cmdInsert.Parameters.AddWithValue("@option3", optionC)
+                        cmdInsert.Parameters.AddWithValue("@option4", optionD)
+                        'MessageBox.Show("inserted dummy")
                         ' Execute the insert query
                         cmdInsert.ExecuteNonQuery()
-
                         ' Clear parameters for next iteration
                         cmdInsert.Parameters.Clear()
                     Next
@@ -102,12 +113,14 @@ Public Class Form4
             ' Check if there are enough integers in the listOfIntegers
             If i <= numberOfQuestions.Count Then
                 ' Create a tuple with the section number and an integer from the listOfIntegers
-                Dim tuple As New Tuple(Of String, Integer)("Section " & i.ToString(), numberOfQuestions(i - 1))
+                Dim tuple As New Tuple(Of String, Integer)(sectionNames(i - 1), numberOfQuestions(i - 1))
                 ' Add the tuple to the sectionData list
                 sectionData.Add(tuple)
             End If
         Next
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        'MessageBox.Show(numberOfSections)
+        'MessageBox.Show(numberOfQuestions.Count)
         LoadSections()
     End Sub
 
@@ -170,7 +183,7 @@ Public Class Form4
 
         Try
             conn.Open()
-            Dim query As String = "SELECT section_id,question_id,question_text,option_a,option_b,option_c,option_d,correct_option FROM quiz_questions where section_id= ? and question_id = ? "
+            Dim query As String = "SELECT question_id,section_id,question,answer,option1,option2,option3,option4 FROM question_pool where section_id= ? and question_id = ? "
             Dim cmd As New OdbcCommand(query, conn)
             cmd.Parameters.AddWithValue("@section_id", section_id)
             cmd.Parameters.AddWithValue("@question_id", question_id)
@@ -182,12 +195,12 @@ Public Class Form4
                 reader.Read()
 
                 ' Retrieve the values as strings
-                Dim questionText As String = reader("question_text").ToString()
-                Dim optionA As String = reader("option_a").ToString()
-                Dim optionB As String = reader("option_b").ToString()
-                Dim optionC As String = reader("option_c").ToString()
-                Dim optionD As String = reader("option_d").ToString()
-                Dim correctOption As String = reader("correct_option").ToString()
+                Dim questionText As String = reader("question").ToString()
+                Dim optionA As String = reader("option1").ToString()
+                Dim optionB As String = reader("option2").ToString()
+                Dim optionC As String = reader("option3").ToString()
+                Dim optionD As String = reader("option4").ToString()
+                Dim correctOption As String = reader("answer").ToString()
 
                 ' Process the retrieved data as needed
                 ' For example, display it in message boxes
@@ -203,6 +216,7 @@ Public Class Form4
                 RichTextBox4.Text = optionC
                 RichTextBox5.Text = optionD
                 RichTextBox6.Text = correctOption
+                'RichTextBox7.Text = marksOfSections(section_id - 1).ToString()
             Else
                 MessageBox.Show("No data found for the given section ID and question ID.")
             End If
@@ -217,8 +231,33 @@ Public Class Form4
 
     Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Button2.Enabled = False
+        Try
+            conn.Open()
+            Dim deleteQuery As String = "delete from minimum_number_of_questions"
+            Using cmdDelete As New OdbcCommand(deleteQuery, conn)
+                cmdDelete.ExecuteNonQuery()
+            End Using
+            'MessageBox.Show("dleted from min")
+            Dim insertQuery As String = "insert into minimum_number_of_questions(section_id,no_qs) values (?,?) "
+            For i As Integer = 1 To numberOfSections Step 1
+                Using cmdInsert As New OdbcCommand(insertQuery, conn)
+                    cmdInsert.Parameters.AddWithValue("@section_id", i)
+                    cmdInsert.Parameters.AddWithValue("@no_qs", numberOfQuestions(i - 1))
+                    'MessageBox.Show("Inserted into minimum table")
+                    cmdInsert.ExecuteNonQuery()
+                    'MessageBox.Show("Inserted into minimum table2")
+                    cmdInsert.Parameters.Clear()
+                End Using
+            Next
+        Catch ex As Exception
+
+        Finally
+            conn.Close()
+        End Try
+        
         Dim Form3 As New Form3()
         Form3.Show()
+        Me.Hide()
     End Sub
 
     Private Sub Button1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
@@ -229,32 +268,35 @@ Public Class Form4
             'save the question to database
             Try
                 conn.Open()
-                Dim updateQuery As String = "UPDATE quiz_questions " &
-                                    "SET question_text = ?, " &
-                                    "    option_a = ?, " &
-                                    "    option_b = ?, " &
-                                    "    option_c = ?, " &
-                                    "    option_d = ?, " &
-                                    "    correct_option = ? " &
+                Dim updateQuery As String = "UPDATE question_pool " &
+                                    "SET question = ?, " &
+                                    "    option1 = ?, " &
+                                    "    option2 = ?, " &
+                                    "    option3 = ?, " &
+                                    "    option4 = ?, " &
+                                    "    answer = ? " &
                                     "WHERE section_id = ? AND question_id = ?"
                 Using cmdUpdate As New OdbcCommand(updateQuery, conn)
                     ' Set parameters for the update query
-                    cmdUpdate.Parameters.AddWithValue("@question_text", RichTextBox1.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option_a", RichTextBox2.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option_b", RichTextBox3.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option_c", RichTextBox4.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option_d", RichTextBox5.Text)
-                    cmdUpdate.Parameters.AddWithValue("@correct_option", RichTextBox6.Text)
+                    cmdUpdate.Parameters.AddWithValue("@question", RichTextBox1.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option1", RichTextBox2.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option2", RichTextBox3.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option3", RichTextBox4.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option4", RichTextBox5.Text)
+                    cmdUpdate.Parameters.AddWithValue("@answer", RichTextBox6.Text)
                     cmdUpdate.Parameters.AddWithValue("@section_id", section_id)
                     cmdUpdate.Parameters.AddWithValue("@question_id", question_id)
                     ' Execute the update query
                     cmdUpdate.ExecuteNonQuery()
                 End Using
+                
             Catch ex As Exception
 
             Finally
                 conn.Close()
             End Try
         End If
+
+        
     End Sub
 End Class

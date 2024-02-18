@@ -24,7 +24,6 @@ Partial Class Form2
     Private Sub InitializeComponent()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Button1
@@ -49,23 +48,11 @@ Partial Class Form2
         Me.Button2.Text = "Check the scores of students whose results are calculated"
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.Cyan
-        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.Location = New System.Drawing.Point(12, 140)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(284, 77)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Release scores of students who gave the exam"
-        Me.Button3.UseVisualStyleBackColor = False
-        '
         'Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(310, 253)
-        Me.Controls.Add(Me.Button3)
+        Me.ClientSize = New System.Drawing.Size(310, 147)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form2"
@@ -75,5 +62,4 @@ Partial Class Form2
     End Sub
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
-    Friend WithEvents Button3 As System.Windows.Forms.Button
 End Class

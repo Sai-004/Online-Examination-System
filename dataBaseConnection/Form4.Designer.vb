@@ -24,6 +24,7 @@ Partial Class Form4
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.RichTextBox6 = New System.Windows.Forms.RichTextBox()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
@@ -36,7 +37,6 @@ Partial Class Form4
         Me.RichTextBox3 = New System.Windows.Forms.RichTextBox()
         Me.RichTextBox2 = New System.Windows.Forms.RichTextBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -67,6 +67,17 @@ Partial Class Form4
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(846, 548)
         Me.Panel2.TabIndex = 6
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.Yellow
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(579, 495)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(247, 36)
+        Me.Button1.TabIndex = 13
+        Me.Button1.Text = "Save the current question"
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Label6
         '
@@ -181,17 +192,6 @@ Partial Class Form4
         Me.Label1.Size = New System.Drawing.Size(91, 24)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Question:"
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.Yellow
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(579, 495)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(247, 36)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "Save the current question"
-        Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
         '
