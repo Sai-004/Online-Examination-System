@@ -1,4 +1,4 @@
-﻿Imports System.Data.Odbc
+Imports System.Data.Odbc
 
 Public Class Form1
     Dim connString As String = "DSN=oee;Uid=root;Pwd=2004;"
@@ -77,11 +77,46 @@ Public Class Form1
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
         If (enteredNumberOfQuestions = True And enteredSections = True) Then
             If Not (numberOfSections = numberOfQuestions.Count) Then
-                MessageBox.Show("The Entered number of questions in each section which doesnt match number of sections", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("The Entered number of questions in each section doesn't match number of sections", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Close()
                 Exit Sub
             End If
-            'Load next form where number of question pool management is done here
+            If numberOfSections = 0 Then
+                MessageBox.Show("Number of sections cannot be 0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Close()
+                Exit Sub
+            End If
+            For i As Integer = 0 To numberOfSections - 1
+                If numberOfQuestions(i) = 0 Then
+                    MessageBox.Show("Number of questions in any section cannot be 0", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Me.Close()
+                    Exit Sub
+                End If
+            Next
+            Button5.Enabled = False
+            'storing the correct values in table in the database
+            Try
+                conn.Open()
+                Dim integerString As String = String.Join(",", numberOfQuestions)
+                'MessageBox.Show(integerString)
+                'To delete previous entries if present
+                Dim queryToDelete As String = "delete from numberOfQuestions"
+                Dim cmd1 As New OdbcCommand(queryToDelete, conn)
+                cmd1.ExecuteNonQuery()
+                'inserted the values in the table
+                Dim query As String = "INSERT INTO numberOfQuestions (sections, questions) VALUES (?, ?)"
+                Dim cmd As New OdbcCommand(query, conn)
+                ' Parameters
+                cmd.Parameters.AddWithValue("@numberOfSections", numberOfSections)
+                cmd.Parameters.AddWithValue("@integerString", integerString)
+                ' Execute query
+                cmd.ExecuteNonQuery()
+            Catch ex As Exception
+                MessageBox.Show("Error connecting to database: " & ex.Message)
+            Finally
+                conn.Close()
+            End Try
+            'Load next form where question pool management is done
             ''''''''''''''''''''''''''''''''''''''''''''''
         End If
     End Sub
