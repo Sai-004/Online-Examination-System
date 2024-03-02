@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form7
+Partial Class AddQuestions
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -139,7 +139,7 @@ Partial Class Form7
         '
         Me.Button1.BackColor = System.Drawing.Color.LightSeaGreen
         Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(472, 447)
+        Me.Button1.Location = New System.Drawing.Point(485, 466)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(157, 33)
         Me.Button1.TabIndex = 14
@@ -244,11 +244,11 @@ Partial Class Form7
         Me.Label8.TabIndex = 25
         Me.Label8.Text = "OptionD"
         '
-        'Form7
+        'AddQuestions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(672, 487)
+        Me.ClientSize = New System.Drawing.Size(672, 511)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Label6)
@@ -266,7 +266,7 @@ Partial Class Form7
         Me.Controls.Add(Me.TextBox4)
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.TextBox2)
-        Me.Name = "Form7"
+        Me.Name = "AddQuestions"
         Me.Text = "ADD QUESTION"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()

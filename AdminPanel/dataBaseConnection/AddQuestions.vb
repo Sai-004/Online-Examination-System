@@ -2,8 +2,8 @@
 Imports System.Data.Odbc
 Imports System.Windows.Forms
 Imports System.Drawing.Drawing2D
-Public Class Form7
-    Dim connString As String = "DSN=oee;Uid=root;Pwd=2004;"
+Public Class AddQuestions
+    Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
     Dim conn As New OdbcConnection(connString)
     Dim numberOfSections As Integer
     Dim numberOfQuestions As New List(Of Integer)
@@ -11,7 +11,11 @@ Public Class Form7
     Dim sectionNames As New List(Of String)
     Dim correctOption As String
     Private selectedOption As String
+    Dim selected As String = False
+    Dim empty As String = False
     Private Sub ADD_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        selected = False
+        empty = False
         Try
             'to fill the variables numberOfSections and numberOfQuestions from database
             conn.Open()
@@ -74,21 +78,45 @@ Public Class Form7
 
     Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
         correctOption = TextBox3.Text
+        selected = True
     End Sub
 
     Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
         correctOption = TextBox4.Text
+        selected = True
     End Sub
 
     Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
         correctOption = TextBox6.Text
+        selected = True
     End Sub
 
     Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
         correctOption = TextBox5.Text
+        selected = True
     End Sub
-
-
+    Private Sub checkForEmptiness()
+        Dim cond As Boolean = True
+        If String.IsNullOrEmpty(TextBox2.Text) Or String.IsNullOrEmpty(TextBox3.Text) Or String.IsNullOrEmpty(TextBox4.Text) Or String.IsNullOrEmpty(TextBox5.Text) Or String.IsNullOrEmpty(TextBox6.Text) Or String.IsNullOrWhiteSpace(TextBox2.Text) Or String.IsNullOrWhiteSpace(TextBox3.Text) Or String.IsNullOrWhiteSpace(TextBox4.Text) Or String.IsNullOrWhiteSpace(TextBox5.Text) Or String.IsNullOrWhiteSpace(TextBox6.Text) Then
+            cond = False
+        End If
+        If cond = False Then
+            MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim Form7 As New AddQuestions()
+            Form7.Show()
+            Me.Hide()
+            empty = True
+            Exit Sub
+        End If
+        If selected = False Then
+            MessageBox.Show("No correct option is selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Dim Form7 As New AddQuestions()
+            Form7.Show()
+            Me.Hide()
+            empty = True
+            Exit Sub
+        End If
+    End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim section_id As Integer
         For i As Integer = 1 To numberOfSections
@@ -97,6 +125,10 @@ Public Class Form7
                 Exit For
             End If
         Next
+        checkForEmptiness()
+        If empty Then
+            Exit Sub
+        End If
         'change the tables and open the question pool management form again
         numberOfQuestions(section_id - 1) = numberOfQuestions(section_id - 1) + 1
         'MessageBox.Show(section_id, numberOfQuestions(section_id - 1))
@@ -122,14 +154,18 @@ Public Class Form7
                 cmdInsert.Parameters.AddWithValue("@option4", TextBox5.Text)
                 cmdInsert.ExecuteNonQuery()
             End Using
-            MessageBox.Show("reached after both insertions")
+            'MessageBox.Show("reached after both insertions")
         Catch ex As Exception
 
         Finally
             conn.Close()
         End Try
-        Dim Form3 As New Form3()
+        Dim Form3 As New QuestionPool()
         Form3.Show()
         Me.Hide()
+    End Sub
+
+    Private Sub Label3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label3.Click
+
     End Sub
 End Class

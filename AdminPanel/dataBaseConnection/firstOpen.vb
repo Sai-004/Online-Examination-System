@@ -1,7 +1,7 @@
 ﻿Imports System.Data.Odbc
 'This form should open only when admin comes first time
-Public Class Form1
-    Dim connString As String = "DSN=oee;Uid=root;Pwd=2004;"
+Public Class firstOpen
+    Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
     Dim conn As New OdbcConnection(connString)
     Dim numberOfSections As Integer
     Dim numberOfQuestions As New List(Of Integer)
@@ -111,7 +111,7 @@ Public Class Form1
                     cmdUpdate.Parameters.AddWithValue("@sections", numberOfSections)
                     ' Execute the UPDATE query
                     cmdUpdate.ExecuteNonQuery()
-                    MessageBox.Show("Admin table updated successfully.")
+                    'MessageBox.Show("Admin table updated successfully.")
                 End Using
                 'section table adding all necessary values
                 Dim deleteQuery As String = "delete from section"
@@ -135,7 +135,7 @@ Public Class Form1
             End Try
             'Load next form where question pool management is done
             ''''''''''''''''''''''''''''''''''''''''''''''
-            Dim Form4 As New Form4()
+            Dim Form4 As New FirstEdit()
             Form4.Show()
             Me.Hide()
         End If

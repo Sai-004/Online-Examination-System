@@ -2,14 +2,16 @@
 Imports System.Windows.Forms
 Imports System.Drawing.Drawing2D
 'This form should open only when admin enters the system for the first time for addition of required number of questions
-Public Class Form4
-    Dim connString As String = "DSN=oee;Uid=root;Pwd=2004;"
+Public Class FirstEdit
+    Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
     Dim conn As New OdbcConnection(connString)
     Dim numberOfSections As Integer
     Dim numberOfQuestions As New List(Of Integer)
     Dim marksOfSections As New List(Of Integer)
     Dim sectionNames As New List(Of String)
     Dim currentQuestion As String = ""
+    Dim correctAnswer As String
+    'Dim selected As Boolean = False
     Private sectionData As New List(Of Tuple(Of String, Integer))
     Private Sub Form4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Panel1.AutoScroll = True
@@ -70,8 +72,8 @@ Public Class Form4
                 cmdTruncate.ExecuteNonQuery()
             End Using
             'MessageBox.Show("hello")
-            MessageBox.Show(sectionNames.Count())
-            MessageBox.Show("number of questions array count" & numberOfQuestions.Count())
+            'MessageBox.Show(sectionNames.Count())
+            'MessageBox.Show("number of questions array count" & numberOfQuestions.Count())
             ' Create the command object for inserting questions
             Using cmdInsert As New OdbcCommand(insertQuery, conn)
                 ' Loop through sections and questions to insert sample data
@@ -215,7 +217,9 @@ Public Class Form4
                 RichTextBox3.Text = optionB
                 RichTextBox4.Text = optionC
                 RichTextBox5.Text = optionD
-                RichTextBox6.Text = correctOption
+                RadioButton4.Checked = True
+                correctAnswer = optionA
+                'RichTextBox6.Text = correctOption
                 'RichTextBox7.Text = marksOfSections(section_id - 1).ToString()
             Else
                 MessageBox.Show("No data found for the given section ID and question ID.")
@@ -254,8 +258,8 @@ Public Class Form4
         Finally
             conn.Close()
         End Try
-        
-        Dim Form3 As New Form3()
+
+        Dim Form3 As New QuestionPool()
         Form3.Show()
         Me.Hide()
     End Sub
@@ -266,6 +270,10 @@ Public Class Form4
         Dim parts() As String = currentQuestion.Split("."c)
         If Integer.TryParse(parts(0), section_id) AndAlso Integer.TryParse(parts(1), question_id) Then
             'save the question to database
+            If String.IsNullOrEmpty(RichTextBox1.Text) Or String.IsNullOrWhiteSpace(RichTextBox1.Text) Or String.IsNullOrEmpty(RichTextBox2.Text) Or String.IsNullOrWhiteSpace(RichTextBox2.Text) Or String.IsNullOrEmpty(RichTextBox3.Text) Or String.IsNullOrWhiteSpace(RichTextBox3.Text) Or String.IsNullOrEmpty(RichTextBox4.Text) Or String.IsNullOrWhiteSpace(RichTextBox4.Text) Or String.IsNullOrEmpty(RichTextBox5.Text) Or String.IsNullOrWhiteSpace(RichTextBox5.Text) Then
+                MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
             Try
                 conn.Open()
                 Dim updateQuery As String = "UPDATE question_pool " &
@@ -283,20 +291,30 @@ Public Class Form4
                     cmdUpdate.Parameters.AddWithValue("@option2", RichTextBox3.Text)
                     cmdUpdate.Parameters.AddWithValue("@option3", RichTextBox4.Text)
                     cmdUpdate.Parameters.AddWithValue("@option4", RichTextBox5.Text)
-                    cmdUpdate.Parameters.AddWithValue("@answer", RichTextBox6.Text)
+                    cmdUpdate.Parameters.AddWithValue("@answer", correctAnswer)
                     cmdUpdate.Parameters.AddWithValue("@section_id", section_id)
                     cmdUpdate.Parameters.AddWithValue("@question_id", question_id)
                     ' Execute the update query
                     cmdUpdate.ExecuteNonQuery()
                 End Using
-                
+
             Catch ex As Exception
 
             Finally
                 conn.Close()
             End Try
         End If
-
-        
+    End Sub
+    Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
+        correctAnswer = RichTextBox2.Text
+    End Sub
+    Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
+        correctAnswer = RichTextBox3.Text
+    End Sub
+    Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
+        correctAnswer = RichTextBox4.Text
+    End Sub
+    Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
+        correctAnswer = RichTextBox5.Text
     End Sub
 End Class

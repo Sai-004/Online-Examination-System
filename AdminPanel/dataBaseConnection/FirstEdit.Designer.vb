@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form4
+Partial Class FirstEdit
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,9 +24,13 @@ Partial Class Form4
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.RadioButton5 = New System.Windows.Forms.RadioButton()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton6 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton7 = New System.Windows.Forms.RadioButton()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.RichTextBox6 = New System.Windows.Forms.RichTextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -39,6 +43,7 @@ Partial Class Form4
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -50,9 +55,9 @@ Partial Class Form4
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.Button1)
+        Me.Panel2.Controls.Add(Me.GroupBox1)
         Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.RichTextBox6)
+        Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.RichTextBox1)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.Label4)
@@ -68,6 +73,72 @@ Partial Class Form4
         Me.Panel2.Size = New System.Drawing.Size(846, 548)
         Me.Panel2.TabIndex = 6
         '
+        'RadioButton5
+        '
+        Me.RadioButton5.AutoSize = True
+        Me.RadioButton5.Location = New System.Drawing.Point(133, 6)
+        Me.RadioButton5.Name = "RadioButton5"
+        Me.RadioButton5.Size = New System.Drawing.Size(54, 21)
+        Me.RadioButton5.TabIndex = 22
+        Me.RadioButton5.TabStop = True
+        Me.RadioButton5.Text = "    B"
+        Me.RadioButton5.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.RadioButton5)
+        Me.GroupBox1.Controls.Add(Me.RadioButton4)
+        Me.GroupBox1.Controls.Add(Me.RadioButton6)
+        Me.GroupBox1.Controls.Add(Me.RadioButton7)
+        Me.GroupBox1.Location = New System.Drawing.Point(248, 424)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(378, 27)
+        Me.GroupBox1.TabIndex = 23
+        Me.GroupBox1.TabStop = False
+        '
+        'RadioButton4
+        '
+        Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Location = New System.Drawing.Point(51, 6)
+        Me.RadioButton4.Name = "RadioButton4"
+        Me.RadioButton4.Size = New System.Drawing.Size(54, 21)
+        Me.RadioButton4.TabIndex = 4
+        Me.RadioButton4.TabStop = True
+        Me.RadioButton4.Text = "    A"
+        Me.RadioButton4.UseVisualStyleBackColor = True
+        '
+        'RadioButton6
+        '
+        Me.RadioButton6.AutoSize = True
+        Me.RadioButton6.Location = New System.Drawing.Point(202, 6)
+        Me.RadioButton6.Name = "RadioButton6"
+        Me.RadioButton6.Size = New System.Drawing.Size(54, 21)
+        Me.RadioButton6.TabIndex = 11
+        Me.RadioButton6.TabStop = True
+        Me.RadioButton6.Text = "    C"
+        Me.RadioButton6.UseVisualStyleBackColor = True
+        '
+        'RadioButton7
+        '
+        Me.RadioButton7.AutoSize = True
+        Me.RadioButton7.Location = New System.Drawing.Point(278, 6)
+        Me.RadioButton7.Name = "RadioButton7"
+        Me.RadioButton7.Size = New System.Drawing.Size(55, 21)
+        Me.RadioButton7.TabIndex = 12
+        Me.RadioButton7.TabStop = True
+        Me.RadioButton7.Text = "    D"
+        Me.RadioButton7.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.Location = New System.Drawing.Point(14, 424)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(196, 24)
+        Me.Label6.TabIndex = 21
+        Me.Label6.Text = "Choose correct option"
+        '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.Yellow
@@ -78,25 +149,6 @@ Partial Class Form4
         Me.Button1.TabIndex = 13
         Me.Button1.Text = "Save the current question"
         Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(14, 412)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(132, 24)
-        Me.Label6.TabIndex = 12
-        Me.Label6.Text = "CorrectOption:"
-        '
-        'RichTextBox6
-        '
-        Me.RichTextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RichTextBox6.Location = New System.Drawing.Point(18, 439)
-        Me.RichTextBox6.Name = "RichTextBox6"
-        Me.RichTextBox6.Size = New System.Drawing.Size(190, 41)
-        Me.RichTextBox6.TabIndex = 11
-        Me.RichTextBox6.Text = ""
         '
         'RichTextBox1
         '
@@ -204,7 +256,7 @@ Partial Class Form4
         Me.Button2.Text = "Save the test and go to Question Pool Management"
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'Form4
+        'FirstEdit
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -212,10 +264,12 @@ Partial Class Form4
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "Form4"
+        Me.Name = "FirstEdit"
         Me.Text = "QuestionPool"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -231,9 +285,13 @@ Partial Class Form4
     Friend WithEvents RichTextBox2 As System.Windows.Forms.RichTextBox
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents RichTextBox6 As System.Windows.Forms.RichTextBox
     Friend WithEvents Button1 As System.Windows.Forms.Button
     Friend WithEvents Button2 As System.Windows.Forms.Button
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents RadioButton5 As System.Windows.Forms.RadioButton
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents RadioButton4 As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton6 As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton7 As System.Windows.Forms.RadioButton
 
 End Class

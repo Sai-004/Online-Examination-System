@@ -1,5 +1,5 @@
 ﻿'This prints all the students results
-Public Class Form5
+Public Class Results
 
     Private Sub Form5_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 

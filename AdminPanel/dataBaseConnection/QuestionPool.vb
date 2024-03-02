@@ -2,14 +2,15 @@
 Imports System.Windows.Forms
 Imports System.Drawing.Drawing2D
 'This form does question pool management like add,edit and delete(for when admin comes not first time)
-Public Class Form3
-    Dim connString As String = "DSN=oee;Uid=root;Pwd=2004;"
+Public Class QuestionPool
+    Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
     Dim conn As New OdbcConnection(connString)
     Dim numberOfSections As Integer
     Dim numberOfQuestions As New List(Of Integer)
     Dim marksOfSections As New List(Of Integer)
     Dim sectionNames As New List(Of String)
     Dim currentQuestion As String = ""
+    Dim correctAnswer As String
     Private sectionData As New List(Of Tuple(Of String, Integer))
     Private Sub Form3_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Panel1.AutoScroll = True
@@ -71,7 +72,7 @@ Public Class Form3
             End If
         Next
         ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-        MessageBox.Show(numberOfQuestions(0))
+        'MessageBox.Show(numberOfQuestions(0))
         LoadSections()
     End Sub
 
@@ -166,7 +167,9 @@ Public Class Form3
                 RichTextBox3.Text = optionB
                 RichTextBox4.Text = optionC
                 RichTextBox5.Text = optionD
-                RichTextBox6.Text = correctOption
+                'RichTextBox6.Text = correctOption
+                correctAnswer = optionA
+                RadioButton4.Checked = True
                 'RichTextBox7.Text = marksOfSections(section_id - 1).ToString()
             Else
                 MessageBox.Show("No data found for the given section ID and question ID.")
@@ -182,7 +185,7 @@ Public Class Form3
 
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
         'This shows adding a function
-        Dim Form7 As New Form7()
+        Dim Form7 As New AddQuestions()
         Form7.Show()
         Me.Hide()
     End Sub
@@ -193,6 +196,10 @@ Public Class Form3
         Dim parts() As String = currentQuestion.Split("."c)
         If Integer.TryParse(parts(0), section_id) AndAlso Integer.TryParse(parts(1), question_id) Then
             'save the question to database
+            If String.IsNullOrEmpty(RichTextBox1.Text) Or String.IsNullOrWhiteSpace(RichTextBox1.Text) Or String.IsNullOrEmpty(RichTextBox2.Text) Or String.IsNullOrWhiteSpace(RichTextBox2.Text) Or String.IsNullOrEmpty(RichTextBox3.Text) Or String.IsNullOrWhiteSpace(RichTextBox3.Text) Or String.IsNullOrEmpty(RichTextBox4.Text) Or String.IsNullOrWhiteSpace(RichTextBox4.Text) Or String.IsNullOrEmpty(RichTextBox5.Text) Or String.IsNullOrWhiteSpace(RichTextBox5.Text) Then
+                MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End If
             Try
                 conn.Open()
                 Dim updateQuery As String = "UPDATE question_pool " &
@@ -214,7 +221,7 @@ Public Class Form3
                     cmdUpdate.Parameters.AddWithValue("@option2", RichTextBox3.Text)
                     cmdUpdate.Parameters.AddWithValue("@option3", RichTextBox4.Text)
                     cmdUpdate.Parameters.AddWithValue("@option4", RichTextBox5.Text)
-                    cmdUpdate.Parameters.AddWithValue("@answer", RichTextBox6.Text)
+                    cmdUpdate.Parameters.AddWithValue("@answer", correctAnswer)
                     cmdUpdate.Parameters.AddWithValue("@section_id", section_id)
                     cmdUpdate.Parameters.AddWithValue("@question_id", question_id)
                     ' Execute the update query
@@ -241,6 +248,7 @@ Public Class Form3
         'this should also reflect on the display
         Try
             conn.Open()
+            'MessageBox.Show("section_id" & section_id & " question_id" & question_id)
             Dim min_number As Integer
 
             Dim selectQuery As String = "select no_qs from minimum_number_of_questions where section_id=?"
@@ -250,7 +258,7 @@ Public Class Form3
                 reader.Read()
                 min_number = Convert.ToInt32(reader("no_qs"))
             End Using
-
+            'MessageBox.Show(min_number)
 
             If min_number = numberOfQuestions(section_id - 1) Then
                 MessageBox.Show("Invalid delete operation", "error")
@@ -303,7 +311,19 @@ Public Class Form3
         RichTextBox3.Clear()
         RichTextBox4.Clear()
         RichTextBox5.Clear()
-        RichTextBox6.Clear()
+        'RichTextBox6.Clear()
 
+    End Sub
+    Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
+        correctAnswer = RichTextBox2.Text
+    End Sub
+    Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
+        correctAnswer = RichTextBox3.Text
+    End Sub
+    Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
+        correctAnswer = RichTextBox4.Text
+    End Sub
+    Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
+        correctAnswer = RichTextBox5.Text
     End Sub
 End Class
