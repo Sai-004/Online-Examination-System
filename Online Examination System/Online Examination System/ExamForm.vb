@@ -1,4 +1,4 @@
-﻿Imports System.Windows.Forms
+Imports System.Windows.Forms
 Imports System.Data.Odbc
 
 Public Class Form1
@@ -7,6 +7,7 @@ Public Class Form1
     Private questionTextsByQuestionId As New Dictionary(Of KeyValuePair(Of Integer, Integer), String)()
     Private optionsByQuestionId As New Dictionary(Of KeyValuePair(Of Integer, Integer), List(Of String))()
     Private MarkedAnswers As New Dictionary(Of KeyValuePair(Of Integer, Integer), Integer)()
+    Private mapping As New Dictionary(Of KeyValuePair(Of Integer, Integer), Integer)()
     Private currentQuestionId As Integer = -1 ' To track the current question ID
     Private currentsectionId As Integer = -1
 
@@ -16,7 +17,7 @@ Public Class Form1
 
     Private Sub LoadSectionsFromDatabase()
         Using connection As New OdbcConnection(connectionString)
-            Dim query As String = "SELECT section_id, section_name, no_of_qs FROM section "
+            Dim query As String = "SELECT section_id, section_name, no_of_qs FROM section order by section_id desc"
             Dim command As New OdbcCommand(query, connection)
 
             Try
@@ -38,7 +39,7 @@ Public Class Form1
             End Try
         End Using
     End Sub
-
+    'returns  number of questions that must be present in each section
     Private Function returnQuestions(ByVal num As Integer) As Integer
         Dim conn As New OdbcConnection(connectionString)
         Dim ans As Integer
@@ -76,7 +77,7 @@ Public Class Form1
 
         ' Load questions and options for the section from the database
         Dim questionsForSection As New Dictionary(Of KeyValuePair(Of Integer, Integer), String)()
-
+        'Dim mapping As New Dictionary(Of Integer, Integer)
         Using connection As New OdbcConnection(connectionString)
             Dim num As Integer = returnQuestions(sectionId)
             Dim query As String = "SELECT question_id, question, option1, option2, option3, option4 FROM question_pool WHERE section_id = ? ORDER BY RAND() LIMIT ?"
@@ -86,16 +87,18 @@ Public Class Form1
             Try
                 connection.Open()
                 Dim reader As OdbcDataReader = command.ExecuteReader()
-
+                Dim j As Integer = 1
                 While reader.Read()
                     Dim questionId As Integer = reader.GetInt32(0)
+                    mapping.Add(New KeyValuePair(Of Integer, Integer)(j, sectionId), questionId)
+                    j = j + 1
                     Dim questionText As String = reader.GetString(1)
                     Dim options As New List(Of String)()
                     For i As Integer = 2 To 5 ' Options start from index 2
                         options.Add(reader.GetString(i))
                     Next
-                    questionsForSection.Add(New KeyValuePair(Of Integer, Integer)(questionId, sectionId), questionText)
-                    optionsByQuestionId.Add(New KeyValuePair(Of Integer, Integer)(questionId, sectionId), options)
+                    questionsForSection.Add(New KeyValuePair(Of Integer, Integer)(j - 1, sectionId), questionText)
+                    optionsByQuestionId.Add(New KeyValuePair(Of Integer, Integer)(j - 1, sectionId), options)
                 End While
 
                 reader.Close()
@@ -124,7 +127,10 @@ Public Class Form1
         SplitContainer1.Panel1.Controls.Add(questionPanel)
         SplitContainer1.Panel1.Controls.Add(sectionLabel)
     End Sub
-
+    'To get actual question id ,from generated one
+    Private Function Actual(ByVal j As Integer, ByVal section_id As Integer) As Integer
+        Return mapping(New KeyValuePair(Of Integer, Integer)(j, section_id))
+    End Function
     Private Sub QuestionButton_Click(ByVal sender As Object, ByVal e As EventArgs)
         Dim questionButton As Button = DirectCast(sender, Button)
         Dim parts() As String = questionButton.Name.Split("_"c)
@@ -133,7 +139,7 @@ Public Class Form1
 
         ' Update the current question ID and display the question text and options
 
-        currentQuestionId = questionId
+        'currentQuestionId = Actual(questionId, sectionId)
         currentsectionId = sectionId
         DisplayQuestionText(questionId, sectionId)
         DisplayOptions(questionId, sectionId)
@@ -142,6 +148,7 @@ Public Class Form1
 
     Private Sub DisplayQuestionText(ByVal questionId As Integer, ByVal sectionId As Integer)
         ' Ensure the current question ID is valid
+        questionId = Actual(questionId, sectionId)
         If questionTextsByQuestionId.ContainsKey((New KeyValuePair(Of Integer, Integer)(questionId, sectionId))) Then
             question_text.Text = questionTextsByQuestionId((New KeyValuePair(Of Integer, Integer)(questionId, sectionId)))
             ques_no.Text = questionId & ")"
@@ -150,6 +157,7 @@ Public Class Form1
 
     Private Sub DisplayOptions(ByVal questionId As Integer, ByVal sectionId As Integer)
         ' Ensure the current question ID is valid
+        questionId = Actual(questionId, sectionId)
         If optionsByQuestionId.ContainsKey((New KeyValuePair(Of Integer, Integer)(questionId, sectionId))) Then
             Dim options As List(Of String) = optionsByQuestionId((New KeyValuePair(Of Integer, Integer)(questionId, sectionId)))
             If options.Count >= 4 Then
