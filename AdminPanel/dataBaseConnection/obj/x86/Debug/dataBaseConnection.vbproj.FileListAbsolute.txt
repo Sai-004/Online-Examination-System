@@ -16,3 +16,6 @@ C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-Syste
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\dataBaseConnection\obj\x86\Debug\dataBaseConnection.Form1.resources
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\dataBaseConnection\obj\x86\Debug\dataBaseConnection.Resources.resources
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\dataBaseConnection\obj\x86\Debug\dataBaseConnection.vbproj.GenerateResource.Cache
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.exe
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.xml
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.pdb

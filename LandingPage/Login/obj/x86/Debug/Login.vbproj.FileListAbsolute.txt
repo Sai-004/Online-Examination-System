@@ -31,3 +31,6 @@ C:\Users\mssri\Documents\Visual Studio 2010\Projects\Login\Login\bin\Debug\Login
 C:\Users\mssri\Documents\Visual Studio 2010\Projects\Login\Login\obj\x86\Debug\Login.Resources.resources
 C:\Users\mssri\Documents\Visual Studio 2010\Projects\Login\Login\obj\x86\Debug\Login.vbproj.GenerateResource.Cache
 C:\Users\mssri\Documents\Visual Studio 2010\Projects\Login\Login\obj\x86\Debug\Login.LandingPage.resources
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\LandingPage\Login\obj\x86\Debug\Login.exe
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\LandingPage\Login\obj\x86\Debug\Login.xml
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\LandingPage\Login\obj\x86\Debug\Login.pdb
