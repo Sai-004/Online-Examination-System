@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Form1
+Partial Class Form
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -34,7 +34,7 @@ Partial Class Form1
         Me.ReviewBtn = New System.Windows.Forms.Button()
         Me.PrevBtn = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-        Me.ques_no = New System.Windows.Forms.Label()
+        Me.qNum_label = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.timer_count = New System.Windows.Forms.Label()
@@ -159,7 +159,7 @@ Partial Class Form1
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.ques_no)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.qNum_label)
         Me.SplitContainer1.Panel2.Controls.Add(Me.opt4)
         Me.SplitContainer1.Panel2.Controls.Add(Me.opt3)
         Me.SplitContainer1.Panel2.Controls.Add(Me.opt2)
@@ -173,15 +173,15 @@ Partial Class Form1
         Me.SplitContainer1.SplitterDistance = 378
         Me.SplitContainer1.TabIndex = 5
         '
-        'ques_no
+        'qNum_label
         '
-        Me.ques_no.AutoSize = True
-        Me.ques_no.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ques_no.Location = New System.Drawing.Point(28, 36)
-        Me.ques_no.Name = "ques_no"
-        Me.ques_no.Size = New System.Drawing.Size(34, 29)
-        Me.ques_no.TabIndex = 10
-        Me.ques_no.Text = "1)"
+        Me.qNum_label.AutoSize = True
+        Me.qNum_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.qNum_label.Location = New System.Drawing.Point(28, 36)
+        Me.qNum_label.Name = "qNum_label"
+        Me.qNum_label.Size = New System.Drawing.Size(34, 29)
+        Me.qNum_label.TabIndex = 10
+        Me.qNum_label.Text = "1)"
         '
         'Panel2
         '
@@ -252,6 +252,6 @@ Partial Class Form1
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents timer_count As System.Windows.Forms.Label
     Friend WithEvents Timer1 As System.Windows.Forms.Timer
-    Friend WithEvents ques_no As System.Windows.Forms.Label
+    Friend WithEvents qNum_label As System.Windows.Forms.Label
 
 End Class
