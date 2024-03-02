@@ -8,17 +8,17 @@ CS-346 Assignment-2 Online Examination System
 5.Admin when entered not the first time,asking him whether he wants to do question pool management or view student results or release the test results of students whose results weren't released.  
 6.Students results page for Admin.  
 7.Question Pool management (2 or 3 pages for add,delete ,edit).  
-## To Connect to the database
-1.The database is hosted on xampp server in lab PC.So, you must connect to intranet to access the database.
-2.Enter 172.16.114.214 to access the xampp server.Navigate to phpmyadmin after this.
-3.The currently using database is schema is 'onlineexaminationsystem'.All tables created and manipulated are visible here.
+## To Connect to the database  
+1.The database is hosted on xampp server in lab PC.So, you must connect to intranet to access the database.  
+2.Enter 172.16.114.214 to access the xampp server.Navigate to phpmyadmin after this.  
+3.The currently using database is schema is 'onlineexaminationsystem'.All tables created and manipulated are visible here.  
 
-## To connect visual basic application to the above hosted database(as admin)
-//add connection string for student here later
-0.Install odbc mysql driver 32bit from [here](https://dev.mysql.com/downloads/connector/odbc/)
-  Run this appliaction as administrator.Navigate to systemDSN, add a connection(choose mysql driver ANSI) .Give DSN name as oee,Username as user123,password as 1234.Choose the database "onlineexaminationsystem".
-  This will create the necessary connection,which can be used through our visual basic application.
-1.The below is the code to insert into some table
+## To connect visual basic application to the above hosted database(as admin)  
+//add connection string for student here later  
+0.Install odbc mysql driver 32bit from [here](https://dev.mysql.com/downloads/connector/odbc/)  
+  Run this appliaction as administrator.Navigate to systemDSN, add a connection(choose mysql driver ANSI) .Give DSN name as oee,Username as user123,password as 1234.Choose the database "onlineexaminationsystem".  
+  This will create the necessary connection,which can be used through our visual basic application.  
+1.The below is the code to insert into some table  
 ```vb
 Dim connString as String = "DSN=oee;Uid=user123;Pwd=1234;"
 Dim conn As New OdbcConnection(connString)
