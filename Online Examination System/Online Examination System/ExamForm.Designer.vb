@@ -34,11 +34,11 @@ Partial Class Form1
         Me.ReviewBtn = New System.Windows.Forms.Button()
         Me.PrevBtn = New System.Windows.Forms.Button()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+        Me.ques_no = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.timer_count = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.ques_no = New System.Windows.Forms.Label()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -173,6 +173,16 @@ Partial Class Form1
         Me.SplitContainer1.SplitterDistance = 378
         Me.SplitContainer1.TabIndex = 5
         '
+        'ques_no
+        '
+        Me.ques_no.AutoSize = True
+        Me.ques_no.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ques_no.Location = New System.Drawing.Point(28, 36)
+        Me.ques_no.Name = "ques_no"
+        Me.ques_no.Size = New System.Drawing.Size(34, 29)
+        Me.ques_no.TabIndex = 10
+        Me.ques_no.Text = "1)"
+        '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.Label3)
@@ -207,16 +217,6 @@ Partial Class Form1
         'Timer1
         '
         Me.Timer1.Enabled = True
-        '
-        'ques_no
-        '
-        Me.ques_no.AutoSize = True
-        Me.ques_no.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ques_no.Location = New System.Drawing.Point(28, 36)
-        Me.ques_no.Name = "ques_no"
-        Me.ques_no.Size = New System.Drawing.Size(34, 29)
-        Me.ques_no.TabIndex = 10
-        Me.ques_no.Text = "1)"
         '
         'Form1
         '

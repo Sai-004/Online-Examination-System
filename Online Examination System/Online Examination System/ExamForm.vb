@@ -2,7 +2,7 @@
 Imports System.Data.Odbc
 
 Public Class Form1
-    Private connectionString As String = "DSN=oee;Uid=root;Pwd=1234"
+    Private connectionString As String = "DSN=oee;Uid=user123;Pwd=1234"
 
     Private questionTextsByQuestionId As New Dictionary(Of Integer, String)()
     Private optionsByQuestionId As New Dictionary(Of Integer, List(Of String))()
@@ -168,6 +168,7 @@ Public Class Form1
     Private tt As Integer = 1
     Private ss As Integer = 59
     Private vv As Integer = 0
+    Private endtime As Integer = 0
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         If vv > 0 Or tt > 0 Or ss > 0 Then
@@ -180,7 +181,13 @@ Public Class Form1
         Else
             timer_count.Text = "00:00"
             timer_count.Enabled = False
-            ' MessageBox.Show("Time Ended")
+            endtime = endtime + 1
+            If endtime = 1 Then
+                MessageBox.Show("Time Ended")
+                Dim newform As New student_profile()
+                newform.Show()
+            End If
+            
         End If
     End Sub
 End Class
