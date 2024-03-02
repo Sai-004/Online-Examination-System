@@ -33,7 +33,7 @@ CREATE TABLE section (
 
 -- Question Pool Table
 CREATE TABLE question_pool (
-    question_id INT PRIMARY KEY,
+    question_id INT,
     section_id INT,
     question VARCHAR(255),
     answer VARCHAR(255),
@@ -56,8 +56,7 @@ CREATE TABLE admin (
     email_id VARCHAR(255),
     password VARCHAR(255),
     sections INT,
-    entered BOOLEAN default 0,
-    FOREIGN KEY (sections) REFERENCES section(section_id)
+    entered BOOLEAN default 0
 );
 
 -- Insert data into the admin table
@@ -92,3 +91,9 @@ CREATE TABLE results (
 -- (1, 15),
 -- (2, 10),
 -- (3, 5);
+
+--To store minimum number of questions in each section
+create table minimum_number_of_questions (
+    section_id INT PRIMARY KEY,
+    no_qs INT
+);
