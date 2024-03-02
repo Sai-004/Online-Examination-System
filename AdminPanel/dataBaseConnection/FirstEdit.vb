@@ -1,6 +1,7 @@
 ﻿Imports System.Data.Odbc
 Imports System.Windows.Forms
 Imports System.Drawing.Drawing2D
+
 'This form should open only when admin enters the system for the first time for addition of required number of questions
 Public Class FirstEdit
     Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
@@ -212,12 +213,12 @@ Public Class FirstEdit
                 '"Option C: " & optionC & vbCrLf &
                 '"Option D: " & optionD & vbCrLf &
                 '"Correct Option: " & correctOption)
-                RichTextBox1.Text = questionText
-                RichTextBox2.Text = optionA
-                RichTextBox3.Text = optionB
-                RichTextBox4.Text = optionC
-                RichTextBox5.Text = optionD
-                RadioButton4.Checked = True
+                Ques_tb.Text = questionText
+                optA_tb.Text = optionA
+                optB_tb.Text = optionB
+                optC_tb.Text = optionC
+                optD_tb.Text = optionD
+                opt1.Checked = True
                 correctAnswer = optionA
                 'RichTextBox6.Text = correctOption
                 'RichTextBox7.Text = marksOfSections(section_id - 1).ToString()
@@ -270,7 +271,7 @@ Public Class FirstEdit
         Dim parts() As String = currentQuestion.Split("."c)
         If Integer.TryParse(parts(0), section_id) AndAlso Integer.TryParse(parts(1), question_id) Then
             'save the question to database
-            If String.IsNullOrEmpty(RichTextBox1.Text) Or String.IsNullOrWhiteSpace(RichTextBox1.Text) Or String.IsNullOrEmpty(RichTextBox2.Text) Or String.IsNullOrWhiteSpace(RichTextBox2.Text) Or String.IsNullOrEmpty(RichTextBox3.Text) Or String.IsNullOrWhiteSpace(RichTextBox3.Text) Or String.IsNullOrEmpty(RichTextBox4.Text) Or String.IsNullOrWhiteSpace(RichTextBox4.Text) Or String.IsNullOrEmpty(RichTextBox5.Text) Or String.IsNullOrWhiteSpace(RichTextBox5.Text) Then
+            If String.IsNullOrEmpty(Ques_tb.Text) Or String.IsNullOrWhiteSpace(Ques_tb.Text) Or String.IsNullOrEmpty(optA_tb.Text) Or String.IsNullOrWhiteSpace(optA_tb.Text) Or String.IsNullOrEmpty(optB_tb.Text) Or String.IsNullOrWhiteSpace(optB_tb.Text) Or String.IsNullOrEmpty(optC_tb.Text) Or String.IsNullOrWhiteSpace(optC_tb.Text) Or String.IsNullOrEmpty(optD_tb.Text) Or String.IsNullOrWhiteSpace(optD_tb.Text) Then
                 MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
             End If
@@ -286,11 +287,11 @@ Public Class FirstEdit
                                     "WHERE section_id = ? AND question_id = ?"
                 Using cmdUpdate As New OdbcCommand(updateQuery, conn)
                     ' Set parameters for the update query
-                    cmdUpdate.Parameters.AddWithValue("@question", RichTextBox1.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option1", RichTextBox2.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option2", RichTextBox3.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option3", RichTextBox4.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option4", RichTextBox5.Text)
+                    cmdUpdate.Parameters.AddWithValue("@question", Ques_tb.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option1", optA_tb.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option2", optB_tb.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option3", optC_tb.Text)
+                    cmdUpdate.Parameters.AddWithValue("@option4", optD_tb.Text)
                     cmdUpdate.Parameters.AddWithValue("@answer", correctAnswer)
                     cmdUpdate.Parameters.AddWithValue("@section_id", section_id)
                     cmdUpdate.Parameters.AddWithValue("@question_id", question_id)
@@ -305,16 +306,21 @@ Public Class FirstEdit
             End Try
         End If
     End Sub
-    Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
-        correctAnswer = RichTextBox2.Text
-    End Sub
-    Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
-        correctAnswer = RichTextBox3.Text
-    End Sub
-    Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
-        correctAnswer = RichTextBox4.Text
-    End Sub
-    Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
-        correctAnswer = RichTextBox5.Text
+
+    Private Sub opt_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opt1.CheckedChanged, opt2.CheckedChanged, opt3.CheckedChanged, opt4.CheckedChanged
+        Dim radioButton As RadioButton = CType(sender, RadioButton)
+        If radioButton.Checked Then
+            Select Case radioButton.Name
+                Case "opt1"
+                    correctAnswer = opt1.Text
+                Case "opt2"
+                    correctAnswer = opt2.Text
+                Case "opt3"
+                    correctAnswer = opt3.Text
+                Case "opt4"
+                    correctAnswer = opt4.Text
+            End Select
+        End If
+
     End Sub
 End Class

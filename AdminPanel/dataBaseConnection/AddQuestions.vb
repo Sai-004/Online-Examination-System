@@ -2,6 +2,7 @@
 Imports System.Data.Odbc
 Imports System.Windows.Forms
 Imports System.Drawing.Drawing2D
+
 Public Class AddQuestions
     Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
     Dim conn As New OdbcConnection(connString)
@@ -13,6 +14,7 @@ Public Class AddQuestions
     Private selectedOption As String
     Dim selected As String = False
     Dim empty As String = False
+
     Private Sub ADD_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         selected = False
         empty = False
@@ -67,37 +69,35 @@ Public Class AddQuestions
         'RadioButton4.Checked = True
     End Sub
 
-    Private Sub GroupBox1_Enter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GroupBox1.Enter
-
-    End Sub
-
     Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ComboBox1.SelectedIndexChanged
         ' Add items to the ComboBox
         selectedOption = ComboBox1.SelectedItem.ToString()
     End Sub
 
-    Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
-        correctOption = TextBox3.Text
-        selected = True
+    Private Sub opt_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opt1.CheckedChanged, opt2.CheckedChanged, opt3.CheckedChanged, opt4.CheckedChanged
+        Dim radioButton As RadioButton = CType(sender, RadioButton)
+        If radioButton.Checked Then
+            Select Case radioButton.Name
+                Case "opt1"
+                    correctOption = opt1.Text
+                    selected = True
+                Case "opt2"
+                    correctOption = opt2.Text
+                    selected = True
+                Case "opt3"
+                    correctOption = opt3.Text
+                    selected = True
+                Case "opt4"
+                    correctOption = opt4.Text
+                    selected = True
+            End Select
+        End If
+
     End Sub
 
-    Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
-        correctOption = TextBox4.Text
-        selected = True
-    End Sub
-
-    Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
-        correctOption = TextBox6.Text
-        selected = True
-    End Sub
-
-    Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
-        correctOption = TextBox5.Text
-        selected = True
-    End Sub
     Private Sub checkForEmptiness()
         Dim cond As Boolean = True
-        If String.IsNullOrEmpty(TextBox2.Text) Or String.IsNullOrEmpty(TextBox3.Text) Or String.IsNullOrEmpty(TextBox4.Text) Or String.IsNullOrEmpty(TextBox5.Text) Or String.IsNullOrEmpty(TextBox6.Text) Or String.IsNullOrWhiteSpace(TextBox2.Text) Or String.IsNullOrWhiteSpace(TextBox3.Text) Or String.IsNullOrWhiteSpace(TextBox4.Text) Or String.IsNullOrWhiteSpace(TextBox5.Text) Or String.IsNullOrWhiteSpace(TextBox6.Text) Then
+        If String.IsNullOrEmpty(Ques_tb.Text) Or String.IsNullOrEmpty(optA_tb.Text) Or String.IsNullOrEmpty(optB_tb.Text) Or String.IsNullOrEmpty(optC_tb.Text) Or String.IsNullOrEmpty(optD_tb.Text) Or String.IsNullOrWhiteSpace(Ques_tb.Text) Or String.IsNullOrWhiteSpace(optA_tb.Text) Or String.IsNullOrWhiteSpace(optB_tb.Text) Or String.IsNullOrWhiteSpace(optC_tb.Text) Or String.IsNullOrWhiteSpace(optD_tb.Text) Then
             cond = False
         End If
         If cond = False Then
@@ -117,6 +117,7 @@ Public Class AddQuestions
             Exit Sub
         End If
     End Sub
+
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
         Dim section_id As Integer
         For i As Integer = 1 To numberOfSections
@@ -146,12 +147,12 @@ Public Class AddQuestions
             Using cmdInsert As New OdbcCommand(insertQuery, conn)
                 cmdInsert.Parameters.AddWithValue("@question_id", numberOfQuestions(section_id - 1))
                 cmdInsert.Parameters.AddWithValue("@section_id", section_id)
-                cmdInsert.Parameters.AddWithValue("@question", TextBox2.Text)
+                cmdInsert.Parameters.AddWithValue("@question", Ques_tb.Text)
                 cmdInsert.Parameters.AddWithValue("@answer", correctOption)
-                cmdInsert.Parameters.AddWithValue("@option1", TextBox4.Text)
-                cmdInsert.Parameters.AddWithValue("@option2", TextBox3.Text)
-                cmdInsert.Parameters.AddWithValue("@option3", TextBox6.Text)
-                cmdInsert.Parameters.AddWithValue("@option4", TextBox5.Text)
+                cmdInsert.Parameters.AddWithValue("@option1", optA_tb.Text)
+                cmdInsert.Parameters.AddWithValue("@option2", optB_tb.Text)
+                cmdInsert.Parameters.AddWithValue("@option3", optC_tb.Text)
+                cmdInsert.Parameters.AddWithValue("@option4", optD_tb.Text)
                 cmdInsert.ExecuteNonQuery()
             End Using
             'MessageBox.Show("reached after both insertions")
@@ -163,9 +164,5 @@ Public Class AddQuestions
         Dim Form3 As New QuestionPool()
         Form3.Show()
         Me.Hide()
-    End Sub
-
-    Private Sub Label3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label3.Click
-
     End Sub
 End Class

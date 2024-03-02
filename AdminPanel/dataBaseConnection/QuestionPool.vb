@@ -1,6 +1,7 @@
 ﻿Imports System.Data.Odbc
 Imports System.Windows.Forms
 Imports System.Drawing.Drawing2D
+
 'This form does question pool management like add,edit and delete(for when admin comes not first time)
 Public Class QuestionPool
     Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
@@ -12,7 +13,8 @@ Public Class QuestionPool
     Dim currentQuestion As String = ""
     Dim correctAnswer As String
     Private sectionData As New List(Of Tuple(Of String, Integer))
-    Private Sub Form3_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    Private Sub question_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Panel1.AutoScroll = True
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Try
@@ -86,7 +88,6 @@ Public Class QuestionPool
             sectionLabel.Margin = New Padding(5)
             Dim myFont As New Font("Arial", 12)
             sectionLabel.Font = myFont
-
             Dim questionCount As Integer = sectionData(i).Item2 ' Item2 is the number of questions
             ' Add question buttons for each section
             Dim rowCount As Integer = Math.Ceiling(questionCount / 3)
@@ -162,15 +163,13 @@ Public Class QuestionPool
                 '"Option C: " & optionC & vbCrLf &
                 '"Option D: " & optionD & vbCrLf &
                 '"Correct Option: " & correctOption)
-                RichTextBox1.Text = questionText
-                RichTextBox2.Text = optionA
-                RichTextBox3.Text = optionB
-                RichTextBox4.Text = optionC
-                RichTextBox5.Text = optionD
-                'RichTextBox6.Text = correctOption
+                Ques_tb.Text = questionText
+                optA_tb.Text = optionA
+                optB_tb.Text = optionB
+                optC_tb.Text = optionC
+                optD_tb.Text = optionD
                 correctAnswer = optionA
-                RadioButton4.Checked = True
-                'RichTextBox7.Text = marksOfSections(section_id - 1).ToString()
+                opt1.Checked = True
             Else
                 MessageBox.Show("No data found for the given section ID and question ID.")
             End If
@@ -180,62 +179,105 @@ Public Class QuestionPool
         Finally
             conn.Close()
         End Try
-        'RichTextBox1.Text = "You clicked on: " & questionInfo & ". Question details will be displayed here."
     End Sub
 
-    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+    Private Sub addQsBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addQsBtn.Click
         'This shows adding a function
-        Dim Form7 As New AddQuestions()
-        Form7.Show()
+        Dim AddQsForm As New AddQuestions()
+        AddQsForm.Show()
         Me.Hide()
     End Sub
-    'below sub is for edit the current question
-    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        Dim section_id As Integer
-        Dim question_id As Integer
-        Dim parts() As String = currentQuestion.Split("."c)
-        If Integer.TryParse(parts(0), section_id) AndAlso Integer.TryParse(parts(1), question_id) Then
-            'save the question to database
-            If String.IsNullOrEmpty(RichTextBox1.Text) Or String.IsNullOrWhiteSpace(RichTextBox1.Text) Or String.IsNullOrEmpty(RichTextBox2.Text) Or String.IsNullOrWhiteSpace(RichTextBox2.Text) Or String.IsNullOrEmpty(RichTextBox3.Text) Or String.IsNullOrWhiteSpace(RichTextBox3.Text) Or String.IsNullOrEmpty(RichTextBox4.Text) Or String.IsNullOrWhiteSpace(RichTextBox4.Text) Or String.IsNullOrEmpty(RichTextBox5.Text) Or String.IsNullOrWhiteSpace(RichTextBox5.Text) Then
-                MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                Exit Sub
-            End If
-            Try
-                conn.Open()
-                Dim updateQuery As String = "UPDATE question_pool " &
-                                    "SET question = ?, " &
-                                    "    option1 = ?, " &
-                                    "    option2 = ?, " &
-                                    "    option3 = ?, " &
-                                    "    option4 = ?, " &
-                                    "    answer = ? " &
-                                    "WHERE section_id = ? AND question_id = ?"
-                Using cmdUpdate As New OdbcCommand(updateQuery, conn)
-                    ' Set parameters for the update query
-                    If RichTextBox1.Text = "" Then 'if empty value is entered stop the execution
-                        MessageBox.Show("0 length text is not allowed")
-                        Me.Close()
-                    End If
-                    cmdUpdate.Parameters.AddWithValue("@question", RichTextBox1.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option1", RichTextBox2.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option2", RichTextBox3.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option3", RichTextBox4.Text)
-                    cmdUpdate.Parameters.AddWithValue("@option4", RichTextBox5.Text)
-                    cmdUpdate.Parameters.AddWithValue("@answer", correctAnswer)
-                    cmdUpdate.Parameters.AddWithValue("@section_id", section_id)
-                    cmdUpdate.Parameters.AddWithValue("@question_id", question_id)
-                    ' Execute the update query
-                    cmdUpdate.ExecuteNonQuery()
-                End Using
-            Catch ex As Exception
 
-            Finally
-                conn.Close()
-            End Try
+    'below sub is for edit the current question
+    Private Sub editQsBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles editQsBtn.Click
+        If editQsBtn.Text = "Edit Question" Then
+            Ques_tb.ReadOnly = False
+            optA_tb.ReadOnly = False
+            optB_tb.ReadOnly = False
+            optC_tb.ReadOnly = False
+            optD_tb.ReadOnly = False
+
+            Ques_tb.BackColor = SystemColors.Window
+            optA_tb.BackColor = SystemColors.Window
+            optB_tb.BackColor = SystemColors.Window
+            optC_tb.BackColor = SystemColors.Window
+            optD_tb.BackColor = SystemColors.Window
+
+            Ques_tb.BorderStyle = BorderStyle.Fixed3D
+            optA_tb.BorderStyle = BorderStyle.Fixed3D
+            optB_tb.BorderStyle = BorderStyle.Fixed3D
+            optC_tb.BorderStyle = BorderStyle.Fixed3D
+            optD_tb.BorderStyle = BorderStyle.Fixed3D
+
+            editQsBtn.Text = "Save Question"
+        Else
+            Dim section_id As Integer
+            Dim question_id As Integer
+            Dim parts() As String = currentQuestion.Split("."c)
+            If Integer.TryParse(parts(0), section_id) AndAlso Integer.TryParse(parts(1), question_id) Then
+                'save the question to database
+                If String.IsNullOrEmpty(Ques_tb.Text) Or String.IsNullOrWhiteSpace(Ques_tb.Text) Or String.IsNullOrEmpty(optA_tb.Text) Or String.IsNullOrWhiteSpace(optA_tb.Text) Or String.IsNullOrEmpty(optB_tb.Text) Or String.IsNullOrWhiteSpace(optB_tb.Text) Or String.IsNullOrEmpty(optC_tb.Text) Or String.IsNullOrWhiteSpace(optC_tb.Text) Or String.IsNullOrEmpty(optD_tb.Text) Or String.IsNullOrWhiteSpace(optD_tb.Text) Then
+                    MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
+                Try
+                    conn.Open()
+                    Dim updateQuery As String = "UPDATE question_pool " &
+                                        "SET question = ?, " &
+                                        "    option1 = ?, " &
+                                        "    option2 = ?, " &
+                                        "    option3 = ?, " &
+                                        "    option4 = ?, " &
+                                        "    answer = ? " &
+                                        "WHERE section_id = ? AND question_id = ?"
+                    Using cmdUpdate As New OdbcCommand(updateQuery, conn)
+                        ' Set parameters for the update query
+                        If Ques_tb.Text = "" Then 'if empty value is entered stop the execution
+                            MessageBox.Show("0 length text is not allowed")
+                            Me.Close()
+                        End If
+                        cmdUpdate.Parameters.AddWithValue("@question", Ques_tb.Text)
+                        cmdUpdate.Parameters.AddWithValue("@option1", optA_tb.Text)
+                        cmdUpdate.Parameters.AddWithValue("@option2", optB_tb.Text)
+                        cmdUpdate.Parameters.AddWithValue("@option3", optC_tb.Text)
+                        cmdUpdate.Parameters.AddWithValue("@option4", optD_tb.Text)
+                        cmdUpdate.Parameters.AddWithValue("@answer", correctAnswer)
+                        cmdUpdate.Parameters.AddWithValue("@section_id", section_id)
+                        cmdUpdate.Parameters.AddWithValue("@question_id", question_id)
+                        ' Execute the update query
+                        cmdUpdate.ExecuteNonQuery()
+                    End Using
+                Catch ex As Exception
+
+                Finally
+                    conn.Close()
+                End Try
+            End If
+            Ques_tb.ReadOnly = True
+            optA_tb.ReadOnly = True
+            optB_tb.ReadOnly = True
+            optC_tb.ReadOnly = True
+            optD_tb.ReadOnly = True
+
+            Ques_tb.BackColor = Color.Snow
+            optA_tb.BackColor = Color.Snow
+            optB_tb.BackColor = Color.Snow
+            optC_tb.BackColor = Color.Snow
+            optD_tb.BackColor = Color.Snow
+
+            Ques_tb.BorderStyle = BorderStyle.None
+            optA_tb.BorderStyle = BorderStyle.None
+            optB_tb.BorderStyle = BorderStyle.None
+            optC_tb.BorderStyle = BorderStyle.None
+            optD_tb.BorderStyle = BorderStyle.None
+
+            editQsBtn.Text = "Edit Question"
         End If
+        
     End Sub
+
     'delete button functionality
-    Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+    Private Sub delQsBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles delQsBtn.Click
         'section_id and question_id of the question clicked
         Dim section_id As Integer
         Dim question_id As Integer
@@ -305,25 +347,30 @@ Public Class QuestionPool
         Finally
             conn.Close()
         End Try
+
         ' clearing all rich text boxes after deleting a question 
-        RichTextBox1.Clear()
-        RichTextBox2.Clear()
-        RichTextBox3.Clear()
-        RichTextBox4.Clear()
-        RichTextBox5.Clear()
-        'RichTextBox6.Clear()
+        Ques_tb.Clear()
+        optA_tb.Clear()
+        optB_tb.Clear()
+        optC_tb.Clear()
+        optD_tb.Clear()
 
     End Sub
-    Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
-        correctAnswer = RichTextBox2.Text
-    End Sub
-    Private Sub RadioButton5_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton5.CheckedChanged
-        correctAnswer = RichTextBox3.Text
-    End Sub
-    Private Sub RadioButton6_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton6.CheckedChanged
-        correctAnswer = RichTextBox4.Text
-    End Sub
-    Private Sub RadioButton7_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton7.CheckedChanged
-        correctAnswer = RichTextBox5.Text
+
+    Private Sub opt_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opt1.CheckedChanged, opt2.CheckedChanged, opt3.CheckedChanged, opt4.CheckedChanged
+        Dim radioButton As RadioButton = CType(sender, RadioButton)
+        If radioButton.Checked Then
+            Select Case radioButton.Name
+                Case "opt1"
+                    correctAnswer = opt1.Text
+                Case "opt2"
+                    correctAnswer = opt2.Text
+                Case "opt3"
+                    correctAnswer = opt3.Text
+                Case "opt4"
+                    correctAnswer = opt4.Text
+            End Select
+        End If
+
     End Sub
 End Class
