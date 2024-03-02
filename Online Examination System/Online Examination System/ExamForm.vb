@@ -70,6 +70,7 @@ Public Class Form1
 
         Dim rowCount As Integer = Math.Ceiling(questionCount / 3)
         Dim questionPanel As New TableLayoutPanel()
+        questionPanel.Name = sectionId.ToString()
         questionPanel.Dock = DockStyle.Top
         questionPanel.AutoSize = True
         questionPanel.ColumnCount = 3
@@ -123,7 +124,7 @@ Public Class Form1
 
             questionPanel.Controls.Add(questionButton)
         Next
-
+        'Zaxs
         SplitContainer1.Panel1.Controls.Add(questionPanel)
         SplitContainer1.Panel1.Controls.Add(sectionLabel)
     End Sub
@@ -140,6 +141,7 @@ Public Class Form1
         ' Update the current question ID and display the question text and options
 
         'currentQuestionId = Actual(questionId, sectionId)
+        currentQuestionId = questionId
         currentsectionId = sectionId
         DisplayQuestionText(questionId, sectionId)
         DisplayOptions(questionId, sectionId)
@@ -148,7 +150,7 @@ Public Class Form1
 
     Private Sub DisplayQuestionText(ByVal questionId As Integer, ByVal sectionId As Integer)
         ' Ensure the current question ID is valid
-        questionId = Actual(questionId, sectionId)
+        'questionId = Actual(sectionId, questionId)
         If questionTextsByQuestionId.ContainsKey((New KeyValuePair(Of Integer, Integer)(questionId, sectionId))) Then
             question_text.Text = questionTextsByQuestionId((New KeyValuePair(Of Integer, Integer)(questionId, sectionId)))
             ques_no.Text = questionId & ")"
@@ -157,7 +159,7 @@ Public Class Form1
 
     Private Sub DisplayOptions(ByVal questionId As Integer, ByVal sectionId As Integer)
         ' Ensure the current question ID is valid
-        questionId = Actual(questionId, sectionId)
+        'questionId = Actual(sectionId, questionId)
         If optionsByQuestionId.ContainsKey((New KeyValuePair(Of Integer, Integer)(questionId, sectionId))) Then
             Dim options As List(Of String) = optionsByQuestionId((New KeyValuePair(Of Integer, Integer)(questionId, sectionId)))
             If options.Count >= 4 Then
@@ -167,8 +169,8 @@ Public Class Form1
                 opt4.Text = options(3)
             End If
         End If
-        If MarkedAnswers.ContainsKey((New KeyValuePair(Of Integer, Integer)(questionId, sectionId))) Then
-            Select Case MarkedAnswers((New KeyValuePair(Of Integer, Integer)(questionId, sectionId)))
+        If MarkedAnswers.ContainsKey((New KeyValuePair(Of Integer, Integer)(Actual(questionId, sectionId), sectionId))) Then
+            Select Case MarkedAnswers((New KeyValuePair(Of Integer, Integer)(Actual(questionId, sectionId), sectionId)))
                 Case 1
                     opt1.Checked = True
                 Case 2
@@ -191,7 +193,10 @@ Public Class Form1
 
     Private Sub BtnNext_Click(ByVal sender As Object, ByVal e As EventArgs) Handles SaveBtn.Click
         ' Move to the next question
-        MarkedAnswers(((New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentsectionId)))) = correctans
+        If opt1.Checked = True Or opt2.Checked = True Or opt3.Checked = True Or opt4.Checked = True Then
+            changeColorToGreen()
+        End If
+        MarkedAnswers(New KeyValuePair(Of Integer, Integer)(Actual(currentQuestionId, currentsectionId), currentsectionId)) = correctans
         Dim nextQuestionId As Integer = currentQuestionId + 1
         Dim nextsectionid As Integer = currentsectionId + 1
         If questionTextsByQuestionId.ContainsKey((New KeyValuePair(Of Integer, Integer)(nextQuestionId, currentsectionId))) Then
@@ -275,6 +280,57 @@ Public Class Form1
                     correctans = 4
             End Select
         End If
-
+    End Sub
+    Private Sub changeColorToGreen()
+        Dim sectionIdToChange As Integer = currentsectionId
+        Dim questionNumberToChange As Integer = currentQuestionId
+        ' Iterate through controls in SplitContainer1.Panel1 to find the questionPanel
+        For Each control As Control In SplitContainer1.Panel1.Controls
+            If TypeOf control Is TableLayoutPanel AndAlso control.Name = sectionIdToChange.ToString() Then
+                ' Iterate through controls in the questionPanel to find the specific question button
+                For Each button As Control In control.Controls
+                    If TypeOf button Is Button Then
+                        Dim buttonNameParts As String() = button.Name.Split("_"c)
+                        If buttonNameParts.Length = 2 Then
+                            Dim buttonSectionId As Integer
+                            Dim buttonQuestionNumber As Integer
+                            If Integer.TryParse(buttonNameParts(0), buttonSectionId) AndAlso
+                               Integer.TryParse(buttonNameParts(1), buttonQuestionNumber) Then
+                                If buttonSectionId = sectionIdToChange AndAlso buttonQuestionNumber = questionNumberToChange Then
+                                    ' Change the color of the button
+                                    button.BackColor = Color.LimeGreen ' Replace with the desired color
+                                End If
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+        Next
+    End Sub
+    Private Sub ReviewBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReviewBtn.Click
+        Dim sectionIdToChange As Integer = currentsectionId
+        Dim questionNumberToChange As Integer = currentQuestionId
+        ' Iterate through controls in SplitContainer1.Panel1 to find the questionPanel
+        For Each control As Control In SplitContainer1.Panel1.Controls
+            If TypeOf control Is TableLayoutPanel AndAlso control.Name = sectionIdToChange.ToString() Then
+                ' Iterate through controls in the questionPanel to find the specific question button
+                For Each button As Control In control.Controls
+                    If TypeOf button Is Button Then
+                        Dim buttonNameParts As String() = button.Name.Split("_"c)
+                        If buttonNameParts.Length = 2 Then
+                            Dim buttonSectionId As Integer
+                            Dim buttonQuestionNumber As Integer
+                            If Integer.TryParse(buttonNameParts(0), buttonSectionId) AndAlso
+                               Integer.TryParse(buttonNameParts(1), buttonQuestionNumber) Then
+                                If buttonSectionId = sectionIdToChange AndAlso buttonQuestionNumber = questionNumberToChange Then
+                                    ' Change the color of the button
+                                    button.BackColor = Color.Aqua ' Replace with the desired color
+                                End If
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+        Next
     End Sub
 End Class
