@@ -62,22 +62,6 @@ Try
                 Dim optionC As String = reader("option3").ToString()
                 Dim optionD As String = reader("option4").ToString()
                 Dim correctOption As String = reader("answer").ToString()
-
-                ' Process the retrieved data as needed
-                ' For example, display it in message boxes
-                'MessageBox.Show("Question: " & questionText & vbCrLf &
-                '"Option A: " & optionA & vbCrLf &
-                '"Option B: " & optionB & vbCrLf &
-                '"Option C: " & optionC & vbCrLf &
-                '"Option D: " & optionD & vbCrLf &
-                '"Correct Option: " & correctOption)
-                RichTextBox1.Text = questionText
-                RichTextBox2.Text = optionA
-                RichTextBox3.Text = optionB
-                RichTextBox4.Text = optionC
-                RichTextBox5.Text = optionD
-                RichTextBox6.Text = correctOption
-                'RichTextBox7.Text = marksOfSections(section_id - 1).ToString()
             Else
                 MessageBox.Show("No data found for the given section ID and question ID.")
             End If
