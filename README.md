@@ -15,9 +15,9 @@ CS-346 Assignment-2 Online Examination System
 
 # To connect visual basic application to the above hosted database(as admin)
 //add connection string for student here later
-'''vb
+```vb
 Dim connString as String = "DSN=oee;Uid=user123;Pwd=1234;"
-'''
+```
 
 # Properties of the above software
 Built using visual basic in visual studio 2010.
