@@ -15,9 +15,10 @@ CS-346 Assignment-2 Online Examination System
 
 ## To connect visual basic application to the above hosted database(as admin)  
 //add connection string for student here later  
-0.Install odbc mysql driver 32bit from [here](https://dev.mysql.com/downloads/connector/odbc/) (select version 8.0.36)
-  Run this appliaction as administrator.Navigate to systemDSN, add a connection(choose mysql driver ANSI) .Give DSN name as oee,Username as user123,password as 1234.Choose the database "onlineexaminationsystem".  
-  This will create the necessary connection,which can be used through our visual basic application.  
+0.Install odbc mysql driver 32bit from [here](https://dev.mysql.com/downloads/connector/odbc/) (select version 8.0.36)  
+    If the above exe file doesn't run, you might have to install visualstudio 2019 redistributable from [here](https://aka.ms/vs/17/release/vc_redist.x86.exe)
+    Run this appliaction as administrator.Navigate to systemDSN, add a connection(choose mysql driver ANSI) .Give DSN name as oee,Username as user123,password as 1234.Choose the database "onlineexaminationsystem".  
+    This will create the necessary connection,which can be used through our visual basic application.  
 1.The below is the code to insert into some table  
 ```vb
 Dim connString as String = "DSN=oee;Uid=user123;Pwd=1234;"
