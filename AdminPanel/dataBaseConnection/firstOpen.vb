@@ -1,4 +1,5 @@
 ﻿Imports System.Data.Odbc
+Imports System.Media
 'This form should open only when admin comes first time
 Public Class firstOpen
     Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"

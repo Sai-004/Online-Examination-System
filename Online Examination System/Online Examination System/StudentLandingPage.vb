@@ -19,7 +19,7 @@ Public Class StudentLandingPage
     End Sub
 
     Private Sub StudentLandingPage_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        MessageBox.Show(rollNumber)
+        'MessageBox.Show(rollNumber)
         ' Populate labels with data from the database
         PopulateLabelsFromDatabase(rollNumber)
 
