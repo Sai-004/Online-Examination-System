@@ -86,12 +86,12 @@ Public Class StudentLandingPage
         Try
             connection.Open()
             Dim shouldBeDisabled As Boolean = False
-            Dim query As String = "select roll_number from student_answers where roll_number=?"
+            Dim query As String = "select exam_given from student where roll_number=?"
             Using cmd As New OdbcCommand(query, connection)
                 cmd.Parameters.AddWithValue("?", rollNumber)
                 Dim reader As OdbcDataReader = cmd.ExecuteReader()
                 If reader.Read() Then
-                    shouldBeDisabled = True
+                    shouldBeDisabled = Convert.ToBoolean(reader("exam_given"))
                 End If
             End Using
             If shouldBeDisabled Then
@@ -122,5 +122,20 @@ Public Class StudentLandingPage
         GradeLb.Visible = True
         PercentileLabel.Visible = True
         PercentileLb.Visible = True
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+        Try
+            connection.Open()
+            Dim query As String = "update student set logged_in = FALSE where roll_number = ? "
+            Using cmd As New OdbcCommand(query, connection)
+                cmd.Parameters.AddWithValue("?", rollNumber)
+                cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+        Finally
+            connection.Close()
+        End Try
+        Application.Exit()
     End Sub
 End Class

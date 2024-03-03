@@ -203,6 +203,11 @@ Public Class LandingPage
                         MessageBox.Show("You are already logged in,please exit from the other application", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Application.Exit()
                     Else
+                        query = "update student set logged_in = TRUE where roll_number = ? "
+                        Using cmd As New OdbcCommand(query, connection)
+                            cmd.Parameters.AddWithValue("?", intRoll)
+                            cmd.ExecuteNonQuery()
+                        End Using
                         logged_in = True
                     End If
                 Catch ex As Exception
@@ -245,5 +250,9 @@ Public Class LandingPage
 
     Private Sub Panel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel2.Paint
         Panel1.BackColor = Color.FromArgb(200, 255, 255, 255)
+    End Sub
+
+    Private Sub LandingPage_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
     End Sub
 End Class

@@ -27,6 +27,20 @@ Public Class ExamForm
     Private verticalLinePanel As Panel ' Declare verticalLinePanel as a member variable
 
     Private Sub Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Dim query As String = "select timeLimit from admin where admin_id = 1 "
+        Dim conn As New OdbcConnection(connectionString)
+        Try
+            conn.Open()
+            Using cmd As New OdbcCommand(query, conn)
+                Dim reader As OdbcDataReader = cmd.ExecuteReader()
+                If reader.Read() Then
+                    tt = Convert.ToInt32(reader("timeLimit")) - 1
+                End If
+            End Using
+        Catch ex As Exception
+        Finally
+            conn.Close()
+        End Try
         LoadSectionsFromDatabase()
 
         ' Directly display the first question
@@ -308,10 +322,25 @@ Public Class ExamForm
                 ' Save the selected answers to the database
 
                 SaveSelectedAnswersToDatabase()
-
+                Dim query As String = "update student set exam_given = TRUE where roll_number = ? "
+                Dim conn As New OdbcConnection(connectionString)
+                Try
+                    conn.Open()
+                    Using cmd As New OdbcCommand(query, conn)
+                        cmd.Parameters.AddWithValue("?", rollNumber)
+                        cmd.ExecuteNonQuery()
+                    End Using
+                Catch ex As Exception
+                Finally
+                    conn.Close()
+                End Try
                 ' Open a new instance of student_profile form with the roll number parameter
                 Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
-                newform.Show()
+                Try
+                    newform.Show()
+                Catch ex As Exception
+                    'MessageBox.Show(ex.Message.ToString())
+                End Try
                 Me.Close()
                 timer_count.Enabled = False
                 temp = temp + 1
@@ -373,10 +402,21 @@ Public Class ExamForm
     End Sub
 
     Private Sub SubmitBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SubmitBtn.Click
+        Dim query As String = "update student set exam_given = TRUE where roll_number = ? "
+        Dim conn As New OdbcConnection(connectionString)
+        Try
+            conn.Open()
+            Using cmd As New OdbcCommand(query, conn)
+                cmd.Parameters.AddWithValue("?", rollNumber)
+                cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+        Finally
+            conn.Close()
+        End Try
         ' Save the selected answers to the database
         If temp = 0 Then
             SaveSelectedAnswersToDatabase()
-
             ' Open a new instance of student_profile form with the roll number parameter
             Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
             newform.Show()
