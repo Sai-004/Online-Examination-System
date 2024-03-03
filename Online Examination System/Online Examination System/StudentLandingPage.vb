@@ -123,4 +123,8 @@ Public Class StudentLandingPage
         PercentileLabel.Visible = True
         PercentileLb.Visible = True
     End Sub
+
+    Private Sub StudentLandingPage_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class
