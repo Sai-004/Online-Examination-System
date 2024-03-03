@@ -204,14 +204,10 @@ Public Class LandingPage
                         MessageBox.Show("You are already logged in,please exit from the other application", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                         Application.Exit()
                     Else
-                        query = "update student set logged_in = TRUE where roll_number = ? "
-                        Using cmd As New OdbcCommand(query, connection)
-                            cmd.Parameters.AddWithValue("?", intRoll)
-                            cmd.ExecuteNonQuery()
-                        End Using
                         logged_in = True
                     End If
                 Catch ex As Exception
+
                 Finally
                     connection.Close()
                 End Try
