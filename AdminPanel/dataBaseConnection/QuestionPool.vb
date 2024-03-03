@@ -416,4 +416,8 @@ Public Class QuestionPool
         End If
 
     End Sub
+
+    Private Sub Button2_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
+        Application.Exit()
+    End Sub
 End Class

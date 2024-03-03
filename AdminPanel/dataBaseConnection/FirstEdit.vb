@@ -229,7 +229,7 @@ Public Class FirstEdit
         End Try
         Dim num As Integer = 0
         If markedAnswers.ContainsKey(New KeyValuePair(Of Integer, Integer)(question_id, section_id)) Then
-            MessageBox.Show(markedAnswers(New KeyValuePair(Of Integer, Integer)(question_id, section_id)))
+            'MessageBox.Show(markedAnswers(New KeyValuePair(Of Integer, Integer)(question_id, section_id)))
             num = markedAnswers.ContainsKey(New KeyValuePair(Of Integer, Integer)(question_id, section_id))
             Select Case markedAnswers((New KeyValuePair(Of Integer, Integer)(question_id, section_id)))
                 Case 1

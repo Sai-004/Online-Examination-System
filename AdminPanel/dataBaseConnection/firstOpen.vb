@@ -9,6 +9,8 @@ Public Class firstOpen
     Dim enteredSections As Boolean = False
     Dim enteredNumberOfQuestions As Boolean = False
     Dim enteredMarks As Boolean = False
+    Dim enteredTime As Boolean = False
+    Dim time As Integer = 2
     Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         'Load data or perform other tasks when the form loads
         Try
@@ -77,7 +79,7 @@ Public Class firstOpen
 
 
     Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
-        If (enteredNumberOfQuestions = True And enteredSections = True And enteredMarks = True) Then
+        If (enteredNumberOfQuestions = True And enteredSections = True And enteredMarks = True And enteredTime = True) Then
             If Not (numberOfSections = numberOfQuestions.Count) Then
                 MessageBox.Show("The Entered number of questions in each section doesn't match number of sections", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Close()
@@ -85,6 +87,11 @@ Public Class firstOpen
             End If
             If Not (numberOfSections = marksOfSections.Count) Then
                 MessageBox.Show("The Entered marks in each section doesn't match number of sections", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Me.Close()
+                Exit Sub
+            End If
+            If time <= 0 Then
+                MessageBox.Show("Please enter the correct time", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Me.Close()
                 Exit Sub
             End If
@@ -109,6 +116,14 @@ Public Class firstOpen
                 Using cmdUpdate As New OdbcCommand(updateQuery, conn)
                     ' Set parameter for the new value of sections
                     cmdUpdate.Parameters.AddWithValue("@sections", numberOfSections)
+                    ' Execute the UPDATE query
+                    cmdUpdate.ExecuteNonQuery()
+                    'MessageBox.Show("Admin table updated successfully.")
+                End Using
+                updateQuery = "UPDATE admin SET timeLimit = ? WHERE admin_id = 1"
+                Using cmdUpdate As New OdbcCommand(updateQuery, conn)
+                    ' Set parameter for the new value of sections
+                    cmdUpdate.Parameters.AddWithValue("@timeLimit", time)
                     ' Execute the UPDATE query
                     cmdUpdate.ExecuteNonQuery()
                     'MessageBox.Show("Admin table updated successfully.")
@@ -158,5 +173,20 @@ Public Class firstOpen
 
     Private Sub Button7_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button7.Click
         RichTextBox3.Text = ""
+    End Sub
+
+    Private Sub Button8_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button8.Click
+        If Not Integer.TryParse(RichTextBox5.Text.Trim(), time) Then
+            MessageBox.Show("Invalid input for the number of sections.")
+            Exit Sub
+        End If
+        enteredTime = True
+        RichTextBox5.ReadOnly = True
+    End Sub
+
+    Private Sub Button9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button9.Click
+        If Not enteredTime Then
+            RichTextBox5.Text = ""
+        End If
     End Sub
 End Class

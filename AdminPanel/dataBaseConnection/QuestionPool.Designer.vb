@@ -42,6 +42,7 @@ Partial Class QuestionPool
         Me.Label_qs = New System.Windows.Forms.Label()
         Me.delQsBtn = New System.Windows.Forms.Button()
         Me.editQsBtn = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -200,10 +201,10 @@ Partial Class QuestionPool
         '
         Me.opt4.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.opt4.AutoSize = True
-        Me.opt4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.opt4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.opt4.Location = New System.Drawing.Point(524, 475)
         Me.opt4.Name = "opt4"
-        Me.opt4.Size = New System.Drawing.Size(47, 29)
+        Me.opt4.Size = New System.Drawing.Size(45, 28)
         Me.opt4.TabIndex = 30
         Me.opt4.TabStop = True
         Me.opt4.Text = "D"
@@ -213,10 +214,10 @@ Partial Class QuestionPool
         '
         Me.opt3.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.opt3.AutoSize = True
-        Me.opt3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.opt3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.opt3.Location = New System.Drawing.Point(436, 475)
         Me.opt3.Name = "opt3"
-        Me.opt3.Size = New System.Drawing.Size(48, 29)
+        Me.opt3.Size = New System.Drawing.Size(45, 28)
         Me.opt3.TabIndex = 29
         Me.opt3.TabStop = True
         Me.opt3.Text = "C"
@@ -226,10 +227,10 @@ Partial Class QuestionPool
         '
         Me.opt2.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.opt2.AutoSize = True
-        Me.opt2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.opt2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.opt2.Location = New System.Drawing.Point(350, 475)
         Me.opt2.Name = "opt2"
-        Me.opt2.Size = New System.Drawing.Size(46, 29)
+        Me.opt2.Size = New System.Drawing.Size(44, 28)
         Me.opt2.TabIndex = 28
         Me.opt2.TabStop = True
         Me.opt2.Text = "B"
@@ -239,10 +240,10 @@ Partial Class QuestionPool
         '
         Me.opt1.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.opt1.AutoSize = True
-        Me.opt1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.opt1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.opt1.Location = New System.Drawing.Point(264, 474)
         Me.opt1.Name = "opt1"
-        Me.opt1.Size = New System.Drawing.Size(47, 29)
+        Me.opt1.Size = New System.Drawing.Size(45, 28)
         Me.opt1.TabIndex = 27
         Me.opt1.TabStop = True
         Me.opt1.Text = "A"
@@ -296,11 +297,23 @@ Partial Class QuestionPool
         Me.editQsBtn.Text = "Edit Question"
         Me.editQsBtn.UseVisualStyleBackColor = False
         '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Salmon
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(12, 567)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(98, 41)
+        Me.Button2.TabIndex = 27
+        Me.Button2.Text = "LogOut"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
         'QuestionPool
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1126, 628)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.editQsBtn)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.addQsBtn)
@@ -333,4 +346,5 @@ Partial Class QuestionPool
     Friend WithEvents opt3 As System.Windows.Forms.RadioButton
     Friend WithEvents opt2 As System.Windows.Forms.RadioButton
     Friend WithEvents opt1 As System.Windows.Forms.RadioButton
+    Friend WithEvents Button2 As System.Windows.Forms.Button
 End Class
