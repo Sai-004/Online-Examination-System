@@ -85,6 +85,12 @@
       <DependentUpon>ExamForm.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="LandingPage.Designer.vb">
+      <DependentUpon>LandingPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="LandingPage.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -100,10 +106,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="student_profile.Designer.vb">
-      <DependentUpon>student_profile.vb</DependentUpon>
+    <Compile Include="StudentLandingPage.Designer.vb">
+      <DependentUpon>StudentLandingPage.vb</DependentUpon>
     </Compile>
-    <Compile Include="student_profile.vb">
+    <Compile Include="StudentLandingPage.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -114,14 +120,17 @@
     <EmbeddedResource Include="ExamForm.resx">
       <DependentUpon>ExamForm.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="LandingPage.resx">
+      <DependentUpon>LandingPage.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="student_profile.resx">
-      <DependentUpon>student_profile.vb</DependentUpon>
+    <EmbeddedResource Include="StudentLandingPage.resx">
+      <DependentUpon>StudentLandingPage.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +143,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\indian_institute_of_technology_guwahati_cover.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

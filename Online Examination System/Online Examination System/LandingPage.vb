@@ -63,7 +63,7 @@ Public Class LandingPage
     End Sub
 
     Private Sub Panel1_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel1.Paint
-        Panel1.BackColor = Color.FromArgb(120, 255, 255, 255)
+        Panel1.BackColor = Color.FromArgb(150, 255, 255, 255)
     End Sub
 
     Private Function ValidateUserDetails(ByVal rollNumber As String, ByVal password As String, ByVal userType As String) As Boolean
@@ -79,8 +79,13 @@ Public Class LandingPage
         Try
             connection.Open()
             Using cmd As New OdbcCommand(query, connection)
-                cmd.Parameters.AddWithValue("@roll_number", rollNumber)
+                If userType = "Student" Then
+                    cmd.Parameters.AddWithValue("@roll_number", rollNumber)
+                ElseIf userType = "Admin" Then
+                    cmd.Parameters.AddWithValue("@email_id", rollNumber)
+                End If
                 cmd.Parameters.AddWithValue("@password", password)
+
                 Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
                 If count > 0 Then
                     userExists = True
@@ -102,10 +107,10 @@ Public Class LandingPage
         Try
             connection.Open()
             Using cmd As New OdbcCommand(query, connection)
-                    cmd.Parameters.AddWithValue("@name", name)
+                cmd.Parameters.AddWithValue("@name", name)
                 cmd.Parameters.AddWithValue("@roll_number", rollNumber)
-                    cmd.Parameters.AddWithValue("@email", email)
-                    cmd.Parameters.AddWithValue("@password", password)
+                cmd.Parameters.AddWithValue("@email", email)
+                cmd.Parameters.AddWithValue("@password", password)
                 cmd.ExecuteNonQuery()
             End Using
         Catch ex As Exception
@@ -140,7 +145,10 @@ Public Class LandingPage
 
             userExists = ValidateUserDetails(RollNumber, Password, "Student")
             If userExists = True Then
-                MessageBox.Show("Student Validated!")
+                ' MessageBox.Show("Student Validated!")
+                Dim stuLandPage As New StudentLandingPage(RollNumber)
+                stuLandPage.Show()
+                Me.WindowState = FormWindowState.Minimized
             Else
                 MessageBox.Show("Student Error: Invalid Credentials")
             End If
@@ -153,7 +161,10 @@ Public Class LandingPage
 
             ' Save user details into the database
             SaveUserDetails(Name, RollNumber, email, Password)
-            MessageBox.Show("Student added successfully")
+            ' MessageBox.Show("Student added successfully")
+            Dim stuLandPage As New StudentLandingPage(RollNumber)
+            stuLandPage.Show()
+            Me.WindowState = FormWindowState.Minimized
         End If
 
 
@@ -162,5 +173,9 @@ Public Class LandingPage
         Textbox2.Clear()
         Textbox3.Clear()
         Textbox4.Clear()
+    End Sub
+
+    Private Sub Panel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel2.Paint
+        Panel1.BackColor = Color.FromArgb(200, 255, 255, 255)
     End Sub
 End Class
