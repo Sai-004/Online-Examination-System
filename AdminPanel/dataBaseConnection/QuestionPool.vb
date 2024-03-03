@@ -1,7 +1,6 @@
 ﻿Imports System.Data.Odbc
 Imports System.Windows.Forms
 Imports System.Drawing.Drawing2D
-Imports System.Media
 
 'This form does question pool management like add,edit and delete(for when admin comes not first time)
 Public Class QuestionPool

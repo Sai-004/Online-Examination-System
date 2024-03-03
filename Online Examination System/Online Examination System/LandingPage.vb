@@ -8,7 +8,6 @@ Public Class LandingPage
     Dim connection As New OdbcConnection(connString)
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles userSignin.Click
-
         Panel2.Visible = True
         Title.Text = "Student Sign In"
         Label1.Visible = False

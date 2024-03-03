@@ -73,7 +73,6 @@ Partial Class StudentLandingPage
         '
         'topNameLabel
         '
-<<<<<<< Updated upstream
         Me.topNameLabel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.topNameLabel.AutoSize = True
         Me.topNameLabel.BackColor = System.Drawing.Color.Transparent
@@ -85,19 +84,6 @@ Partial Class StudentLandingPage
         Me.topNameLabel.Size = New System.Drawing.Size(178, 29)
         Me.topNameLabel.TabIndex = 27
         Me.topNameLabel.Text = "Student Name"
-=======
-        Me.Label2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label2.Location = New System.Drawing.Point(1049, 17)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(106, 29)
-        Me.Label2.TabIndex = 27
-        Me.Label2.Text = "Srinivas"
->>>>>>> Stashed changes
         '
         'Label1
         '
