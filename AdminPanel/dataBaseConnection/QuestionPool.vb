@@ -12,6 +12,9 @@ Public Class QuestionPool
     Dim sectionNames As New List(Of String)
     Dim currentQuestion As String = ""
     Dim correctAnswer As String
+    Dim markedAnswers As New Dictionary(Of KeyValuePair(Of Integer, Integer), Integer)()
+    Dim currentQuestionId As Integer = -1
+    Dim currentSectionId As Integer = -1
     Private sectionData As New List(Of Tuple(Of String, Integer))
 
     Private Sub question_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -132,8 +135,10 @@ Public Class QuestionPool
             ' Use integerPart and fractionalPart here
             'Console.WriteLine("Integer part: " & section_id)
             'Console.WriteLine("Fractional part: " & question_id)
+            currentQuestionId = question_id
+            currentSectionId = section_id
         End If
-
+        Dim p As Integer = 0
         Try
             conn.Open()
             Dim query As String = "SELECT question_id,section_id,question,answer,option1,option2,option3,option4 FROM question_pool where section_id= ? and question_id = ? "
@@ -168,8 +173,17 @@ Public Class QuestionPool
                 optB_tb.Text = optionB
                 optC_tb.Text = optionC
                 optD_tb.Text = optionD
-                correctAnswer = optionA
-                opt1.Checked = True
+                correctAnswer = correctOption
+                If correctOption = optionA Then
+                    p = 1
+                ElseIf correctOption = optionB Then
+                    p = 2
+                ElseIf correctOption = optionC Then
+                    p = 3
+                ElseIf correctOption = optionD Then
+                    p = 4
+                End If
+                'opt1.Checked = True
             Else
                 MessageBox.Show("No data found for the given section ID and question ID.")
             End If
@@ -179,6 +193,26 @@ Public Class QuestionPool
         Finally
             conn.Close()
         End Try
+        If markedAnswers.ContainsKey((New KeyValuePair(Of Integer, Integer)(question_id, section_id))) Then
+            Select Case markedAnswers((New KeyValuePair(Of Integer, Integer)(question_id, section_id)))
+                Case 1
+                    opt1.Checked = True
+                Case 2
+                    opt2.Checked = True
+                Case 3
+                    opt3.Checked = True
+                Case 4
+                    opt4.Checked = True
+            End Select
+        ElseIf p = 1 Then
+            opt1.Checked = True
+        ElseIf p = 2 Then
+            opt2.Checked = True
+        ElseIf p = 3 Then
+            opt3.Checked = True
+        ElseIf p = 4 Then
+            opt4.Checked = True
+        End If
     End Sub
 
     Private Sub addQsBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addQsBtn.Click
@@ -216,6 +250,15 @@ Public Class QuestionPool
             Dim parts() As String = currentQuestion.Split("."c)
             If Integer.TryParse(parts(0), section_id) AndAlso Integer.TryParse(parts(1), question_id) Then
                 'save the question to database
+                If opt1.Checked = True Then
+                    markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 1
+                ElseIf opt2.Checked = True Then
+                    markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 2
+                ElseIf opt3.Checked = True Then
+                    markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 3
+                ElseIf opt4.Checked = True Then
+                    markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 4
+                End If
                 If String.IsNullOrEmpty(Ques_tb.Text) Or String.IsNullOrWhiteSpace(Ques_tb.Text) Or String.IsNullOrEmpty(optA_tb.Text) Or String.IsNullOrWhiteSpace(optA_tb.Text) Or String.IsNullOrEmpty(optB_tb.Text) Or String.IsNullOrWhiteSpace(optB_tb.Text) Or String.IsNullOrEmpty(optC_tb.Text) Or String.IsNullOrWhiteSpace(optC_tb.Text) Or String.IsNullOrEmpty(optD_tb.Text) Or String.IsNullOrWhiteSpace(optD_tb.Text) Then
                     MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Exit Sub
@@ -362,13 +405,13 @@ Public Class QuestionPool
         If radioButton.Checked Then
             Select Case radioButton.Name
                 Case "opt1"
-                    correctAnswer = opt1.Text
+                    correctAnswer = optA_tb.Text
                 Case "opt2"
-                    correctAnswer = opt2.Text
+                    correctAnswer = optB_tb.Text
                 Case "opt3"
-                    correctAnswer = opt3.Text
+                    correctAnswer = optC_tb.Text
                 Case "opt4"
-                    correctAnswer = opt4.Text
+                    correctAnswer = optD_tb.Text
             End Select
         End If
 

@@ -14,7 +14,13 @@ Public Class FirstEdit
     Dim correctAnswer As String
     'Dim selected As Boolean = False
     Private sectionData As New List(Of Tuple(Of String, Integer))
+    Dim markedAnswers As New Dictionary(Of KeyValuePair(Of Integer, Integer), Integer)()
+    Dim currentQuestionId As Integer = -1
+    Dim currentSectionId As Integer = -1
     Private Sub Form4_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        'opt4.Checked = True
+        'opt1.GroupName = "1"
+
         Panel1.AutoScroll = True
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         Try
@@ -167,6 +173,7 @@ Public Class FirstEdit
         Next
     End Sub
 
+
     Private Sub QuestionButton_Click(ByVal sender As Object, ByVal e As EventArgs)
         ' Handle click event of question buttons
         Dim questionButton As Button = DirectCast(sender, Button)
@@ -182,6 +189,8 @@ Public Class FirstEdit
             ' Use integerPart and fractionalPart here
             'Console.WriteLine("Integer part: " & section_id)
             'Console.WriteLine("Fractional part: " & question_id)
+            currentQuestionId = question_id
+            currentSectionId = section_id
         End If
 
         Try
@@ -196,7 +205,6 @@ Public Class FirstEdit
             If reader.HasRows Then
                 ' Read the first row
                 reader.Read()
-
                 ' Retrieve the values as strings
                 Dim questionText As String = reader("question").ToString()
                 Dim optionA As String = reader("option1").ToString()
@@ -204,24 +212,12 @@ Public Class FirstEdit
                 Dim optionC As String = reader("option3").ToString()
                 Dim optionD As String = reader("option4").ToString()
                 Dim correctOption As String = reader("answer").ToString()
-
-                ' Process the retrieved data as needed
-                ' For example, display it in message boxes
-                'MessageBox.Show("Question: " & questionText & vbCrLf &
-                '"Option A: " & optionA & vbCrLf &
-                '"Option B: " & optionB & vbCrLf &
-                '"Option C: " & optionC & vbCrLf &
-                '"Option D: " & optionD & vbCrLf &
-                '"Correct Option: " & correctOption)
                 Ques_tb.Text = questionText
                 optA_tb.Text = optionA
                 optB_tb.Text = optionB
                 optC_tb.Text = optionC
                 optD_tb.Text = optionD
-                opt1.Checked = True
-                correctAnswer = optionA
-                'RichTextBox6.Text = correctOption
-                'RichTextBox7.Text = marksOfSections(section_id - 1).ToString()
+                correctAnswer = correctOption
             Else
                 MessageBox.Show("No data found for the given section ID and question ID.")
             End If
@@ -231,9 +227,30 @@ Public Class FirstEdit
         Finally
             conn.Close()
         End Try
-        'RichTextBox1.Text = "You clicked on: " & questionInfo & ". Question details will be displayed here."
+        Dim num As Integer = 0
+        If markedAnswers.ContainsKey(New KeyValuePair(Of Integer, Integer)(question_id, section_id)) Then
+            MessageBox.Show(markedAnswers(New KeyValuePair(Of Integer, Integer)(question_id, section_id)))
+            num = markedAnswers.ContainsKey(New KeyValuePair(Of Integer, Integer)(question_id, section_id))
+            Select Case markedAnswers((New KeyValuePair(Of Integer, Integer)(question_id, section_id)))
+                Case 1
+                    RadioButton1.Checked = True
+                Case 2
+                    RadioButton2.Checked = True
+                Case 3
+                    RadioButton3.Checked = True
+                Case 4
+                    RadioButton4.Checked = True
+            End Select
+            'opt4.Checked=tru
+        Else
+            RadioButton1.Checked = True
+            RadioButton2.Checked = False
+            RadioButton3.Checked = False
+            RadioButton4.Checked = False
+        End If
+        'RadioButton4.Checked = True
     End Sub
-
+    'question pool
     Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         Button2.Enabled = False
         Try
@@ -271,6 +288,20 @@ Public Class FirstEdit
         Dim parts() As String = currentQuestion.Split("."c)
         If Integer.TryParse(parts(0), section_id) AndAlso Integer.TryParse(parts(1), question_id) Then
             'save the question to database
+            'MessageBox.Show("currentquestion" & currentQuestionId & "currentsection " & currentSectionId)
+            If RadioButton1.Checked = True Then
+                markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 1
+                correctAnswer = optA_tb.Text
+            ElseIf RadioButton2.Checked = True Then
+                markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 2
+                correctAnswer = optB_tb.Text
+            ElseIf RadioButton3.Checked = True Then
+                markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 3
+                correctAnswer = optC_tb.Text
+            ElseIf RadioButton4.Checked = True Then
+                markedAnswers(New KeyValuePair(Of Integer, Integer)(currentQuestionId, currentSectionId)) = 4
+                correctAnswer = optD_tb.Text
+            End If
             If String.IsNullOrEmpty(Ques_tb.Text) Or String.IsNullOrWhiteSpace(Ques_tb.Text) Or String.IsNullOrEmpty(optA_tb.Text) Or String.IsNullOrWhiteSpace(optA_tb.Text) Or String.IsNullOrEmpty(optB_tb.Text) Or String.IsNullOrWhiteSpace(optB_tb.Text) Or String.IsNullOrEmpty(optC_tb.Text) Or String.IsNullOrWhiteSpace(optC_tb.Text) Or String.IsNullOrEmpty(optD_tb.Text) Or String.IsNullOrWhiteSpace(optD_tb.Text) Then
                 MessageBox.Show("Empty text is not allowed", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
@@ -307,20 +338,21 @@ Public Class FirstEdit
         End If
     End Sub
 
-    Private Sub opt_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opt1.CheckedChanged, opt2.CheckedChanged, opt3.CheckedChanged, opt4.CheckedChanged
-        Dim radioButton As RadioButton = CType(sender, RadioButton)
-        If radioButton.Checked Then
-            Select Case radioButton.Name
-                Case "opt1"
-                    correctAnswer = opt1.Text
-                Case "opt2"
-                    correctAnswer = opt2.Text
-                Case "opt3"
-                    correctAnswer = opt3.Text
-                Case "opt4"
-                    correctAnswer = opt4.Text
-            End Select
-        End If
+    
+    
+    Private Sub RadioButton3_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton3.CheckedChanged
+        correctAnswer = optC_tb.Text
+    End Sub
 
+    Private Sub RadioButton1_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton1.CheckedChanged
+        correctAnswer = optA_tb.Text
+    End Sub
+
+    Private Sub RadioButton2_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton2.CheckedChanged
+        correctAnswer = optB_tb.Text
+    End Sub
+
+    Private Sub RadioButton4_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RadioButton4.CheckedChanged
+        correctAnswer = optD_tb.Text
     End Sub
 End Class

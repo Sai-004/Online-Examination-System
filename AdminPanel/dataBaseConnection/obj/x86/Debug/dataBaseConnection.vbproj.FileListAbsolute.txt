@@ -44,3 +44,17 @@ C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-Syste
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.AddQuestions.resources
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.Resources.resources
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.vbproj.GenerateResource.Cache
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.exe
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.xml
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.pdb
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\bin\Debug\dataBaseConnection.exe
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\bin\Debug\dataBaseConnection.pdb
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\bin\Debug\dataBaseConnection.xml
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.firstOpen.resources
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.otherOpen.resources
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.QuestionPool.resources
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.FirstEdit.resources
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.AddQuestions.resources
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.Resources.resources
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.Results.resources
+C:\Users\koush\Desktop\Online-Examination-System\AdminPanel\dataBaseConnection\obj\x86\Debug\dataBaseConnection.vbproj.GenerateResource.Cache
