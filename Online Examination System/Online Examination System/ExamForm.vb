@@ -16,6 +16,10 @@ Public Class Form
 
     Private Sub Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         LoadSectionsFromDatabase()
+        currentQuestionId = 1
+        currentSectionId = 1
+        DisplayQuestionText(1, 1)
+        DisplayOptions(1, 1)
     End Sub
 
     Private Sub LoadSectionsFromDatabase()
@@ -181,6 +185,11 @@ Public Class Form
                     opt3.Checked = True
                 Case 4
                     opt4.Checked = True
+                Case -1
+                    opt1.Checked = False
+                    opt2.Checked = False
+                    opt3.Checked = False
+                    opt4.Checked = False
             End Select
         Else
             opt1.Checked = False
@@ -194,10 +203,11 @@ Public Class Form
         ' Mark question as answered if selected an option
         If opt1.Checked = True Or opt2.Checked = True Or opt3.Checked = True Or opt4.Checked = True Then
             changeBtnColor(currentSectionId, currentQuestionId, "save")
+            ' Save the marked answer
+            MarkedAnswers(New KeyValuePair(Of Integer, Integer)(ActualQuestionId(currentQuestionId, currentSectionId), currentSectionId)) = selectedAns
         End If
 
-        ' Save the marked answer
-        MarkedAnswers(New KeyValuePair(Of Integer, Integer)(ActualQuestionId(currentQuestionId, currentsectionId), currentsectionId)) = selectedAns
+
 
         Dim nextQuestionId As Integer = currentQuestionId + 1
         Dim nextsectionid As Integer = currentSectionId + 1
@@ -249,20 +259,31 @@ Public Class Form
     Private tt As Integer = 1
     Private ss As Integer = 59
     Private vv As Integer = 0
-
+    Private temp As Integer = 0
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
         If vv > 0 Or tt > 0 Or ss > 0 Then
             timer_count.Text = Format(tt, "00:") & Format(ss, "00")
             ss = ss - 1
             If ss < 0 Then
-                ss = 59
+                ss = 59S
                 tt = tt - 1
             End If
         Else
-            timer_count.Text = "00:00"
-            timer_count.Enabled = False
-            ' MessageBox.Show("Time Ended")
-        End If
+            If temp = 0 Then
+                timer_count.Text = "00:00"
+                ' Save the selected answers to the database
+
+                SaveSelectedAnswersToDatabase()
+
+                ' Open a new instance of student_profile form with the roll number parameter
+                Dim newform As New student_profile(70) ' Pass the roll number here
+                newform.Show()
+                Me.WindowState = FormWindowState.Minimized
+                timer_count.Enabled = False
+                temp = temp + 1
+                ' MessageBox.Show("Time Ended")
+            End If
+            End If
     End Sub
 
     Private Sub opt_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opt1.CheckedChanged, opt2.CheckedChanged, opt3.CheckedChanged, opt4.CheckedChanged
@@ -319,11 +340,16 @@ Public Class Form
 
     Private Sub SubmitBtn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SubmitBtn.Click
         ' Save the selected answers to the database
-        SaveSelectedAnswersToDatabase()
+        If temp = 0 Then
+            SaveSelectedAnswersToDatabase()
 
-        ' Open a new instance of student_profile form with the roll number parameter
-        Dim newform As New student_profile(70) ' Pass the roll number here
-        newform.Show()
+            ' Open a new instance of student_profile form with the roll number parameter
+            Dim newform As New student_profile(70) ' Pass the roll number here
+            newform.Show()
+            Me.WindowState = FormWindowState.Minimized
+            temp = temp + 1
+        End If
+        ' Me.Close()
     End Sub
 
 
@@ -367,5 +393,4 @@ Public Class Form
             End Try
         End Using
     End Sub
-
 End Class

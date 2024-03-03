@@ -55,12 +55,13 @@ Public Class student_profile
                 connection.Open()
 
                 ' Query to retrieve result
-                Dim query As String = "SELECT marks, percentage, grade, percentile, rank FROM results WHERE roll_number = ?"
+                Dim query As String = "SELECT marks, percentage, grade, percentile FROM results WHERE roll_number = ?"
                 Using command As New OdbcCommand(query, connection)
                     command.Parameters.AddWithValue("@roll_number", rollNumber)
 
                     ' Execute the query
                     Dim reader As OdbcDataReader = command.ExecuteReader()
+
 
                     ' Check if there are rows returned
                     If reader.HasRows Then
@@ -71,12 +72,23 @@ Public Class student_profile
                         percentageTextBox.Text = reader.GetDouble(1).ToString()
                         gradeTextBox.Text = reader.GetString(2)
                         percentileTextBox.Text = reader.GetDouble(3).ToString()
-                        rankTextBox.Text = reader.GetInt32(4).ToString()
+                        'rankTextBox.Text = reader.GetInt32(4).ToString()
                     End If
                 End Using
             Catch ex As Exception
                 MessageBox.Show("Error loading result: " & ex.Message)
             End Try
         End Using
+    End Sub
+
+    Private Sub student_profile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
+
+        Dim newform As New Certificate(70) ' Pass the roll number here
+        newform.Show()
+        Me.WindowState = FormWindowState.Minimized
     End Sub
 End Class

@@ -218,7 +218,7 @@ Partial Class Form
         '
         Me.Timer1.Enabled = True
         '
-        'Form1
+        'Form
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -226,7 +226,7 @@ Partial Class Form
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.Panel2)
-        Me.Name = "Form1"
+        Me.Name = "Form"
         Me.Text = "Exam Panel"
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.Panel2.PerformLayout()
