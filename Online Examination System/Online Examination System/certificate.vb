@@ -80,13 +80,4 @@ Public Class Certificate
             End Try
         End Using
     End Sub
-
-    Private Sub Certificate_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-
-    End Sub
-
-
-    Private Sub Label4_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label4.Click
-
-    End Sub
 End Class

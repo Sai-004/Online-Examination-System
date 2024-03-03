@@ -1,8 +1,18 @@
 Imports System.Windows.Forms
 Imports System.Data.Odbc
 
-Public Class Form
+Public Class ExamForm
     Private connectionString As String = "DSN=oee;Uid=user123;Pwd=1234"
+
+    ' Variable to store the roll number received from the exam panel form
+    Private rollNumber As Integer = 70 ' Default value
+
+    Public Sub New(ByVal rollNumber As Integer)
+        InitializeComponent()
+
+        ' Set the rollNumber received from the exam panel form
+        Me.rollNumber = rollNumber
+    End Sub
 
     ' Frequently used Dictionaries
     Private questionTextsBySectionId As New Dictionary(Of KeyValuePair(Of Integer, Integer), String)()
@@ -16,6 +26,8 @@ Public Class Form
 
     Private Sub Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         LoadSectionsFromDatabase()
+
+        ' Directly display the first question
         currentQuestionId = 1
         currentSectionId = 1
         DisplayQuestionText(1, 1)
@@ -276,14 +288,14 @@ Public Class Form
                 SaveSelectedAnswersToDatabase()
 
                 ' Open a new instance of student_profile form with the roll number parameter
-                Dim newform As New student_profile(70) ' Pass the roll number here
+                Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
                 newform.Show()
                 Me.WindowState = FormWindowState.Minimized
                 timer_count.Enabled = False
                 temp = temp + 1
                 ' MessageBox.Show("Time Ended")
             End If
-            End If
+        End If
     End Sub
 
     Private Sub opt_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles opt1.CheckedChanged, opt2.CheckedChanged, opt3.CheckedChanged, opt4.CheckedChanged
@@ -344,7 +356,7 @@ Public Class Form
             SaveSelectedAnswersToDatabase()
 
             ' Open a new instance of student_profile form with the roll number parameter
-            Dim newform As New student_profile(70) ' Pass the roll number here
+            Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
             newform.Show()
             Me.WindowState = FormWindowState.Minimized
             temp = temp + 1
@@ -381,7 +393,7 @@ Public Class Form
 
                     Dim query As String = "INSERT INTO student_answers (roll_number, section_id, question_id, selected_answer) VALUES (?, ?, ?, ?)"
                     Using command As New OdbcCommand(query, connection)
-                        command.Parameters.AddWithValue("@roll_number", 70) ' Assuming fixed roll number
+                        command.Parameters.AddWithValue("@roll_number", rollNumber) ' Assuming fixed roll number
                         command.Parameters.AddWithValue("@section_id", section_id)
                         command.Parameters.AddWithValue("@question_id", question_id)
                         command.Parameters.AddWithValue("@selected_answer", selected_answer)
