@@ -15,6 +15,10 @@ OnlineExaminationSystem
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
+</member><member name="P:Online_Examination_System.My.Resources.Resources.campus">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
 </member><member name="P:Online_Examination_System.My.Resources.Resources.indian_institute_of_technology_guwahati_cover">
 	<summary>
   Looks up a localized resource of type System.Drawing.Bitmap.

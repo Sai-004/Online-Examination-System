@@ -24,10 +24,6 @@ Partial Class FirstEdit
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
-        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
         Me.LabelA = New System.Windows.Forms.Label()
         Me.LabelB = New System.Windows.Forms.Label()
         Me.Label_ans = New System.Windows.Forms.Label()
@@ -41,6 +37,10 @@ Partial Class FirstEdit
         Me.Label_qs = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.RadioButton1 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton2 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton3 = New System.Windows.Forms.RadioButton()
+        Me.RadioButton4 = New System.Windows.Forms.RadioButton()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -75,54 +75,6 @@ Partial Class FirstEdit
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(869, 567)
         Me.Panel2.TabIndex = 6
-        '
-        'RadioButton4
-        '
-        Me.RadioButton4.AutoSize = True
-        Me.RadioButton4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton4.Location = New System.Drawing.Point(457, 452)
-        Me.RadioButton4.Name = "RadioButton4"
-        Me.RadioButton4.Size = New System.Drawing.Size(45, 28)
-        Me.RadioButton4.TabIndex = 45
-        Me.RadioButton4.TabStop = True
-        Me.RadioButton4.Text = "D"
-        Me.RadioButton4.UseVisualStyleBackColor = True
-        '
-        'RadioButton3
-        '
-        Me.RadioButton3.AutoSize = True
-        Me.RadioButton3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton3.Location = New System.Drawing.Point(394, 451)
-        Me.RadioButton3.Name = "RadioButton3"
-        Me.RadioButton3.Size = New System.Drawing.Size(45, 28)
-        Me.RadioButton3.TabIndex = 44
-        Me.RadioButton3.TabStop = True
-        Me.RadioButton3.Text = "C"
-        Me.RadioButton3.UseVisualStyleBackColor = True
-        '
-        'RadioButton2
-        '
-        Me.RadioButton2.AutoSize = True
-        Me.RadioButton2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton2.Location = New System.Drawing.Point(331, 452)
-        Me.RadioButton2.Name = "RadioButton2"
-        Me.RadioButton2.Size = New System.Drawing.Size(44, 28)
-        Me.RadioButton2.TabIndex = 43
-        Me.RadioButton2.TabStop = True
-        Me.RadioButton2.Text = "B"
-        Me.RadioButton2.UseVisualStyleBackColor = True
-        '
-        'RadioButton1
-        '
-        Me.RadioButton1.AutoSize = True
-        Me.RadioButton1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.RadioButton1.Location = New System.Drawing.Point(275, 451)
-        Me.RadioButton1.Name = "RadioButton1"
-        Me.RadioButton1.Size = New System.Drawing.Size(45, 28)
-        Me.RadioButton1.TabIndex = 42
-        Me.RadioButton1.TabStop = True
-        Me.RadioButton1.Text = "A"
-        Me.RadioButton1.UseVisualStyleBackColor = True
         '
         'LabelA
         '
@@ -273,6 +225,54 @@ Partial Class FirstEdit
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Move to Question Pool"
         Me.Button2.UseVisualStyleBackColor = False
+        '
+        'RadioButton1
+        '
+        Me.RadioButton1.AutoSize = True
+        Me.RadioButton1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadioButton1.Location = New System.Drawing.Point(275, 451)
+        Me.RadioButton1.Name = "RadioButton1"
+        Me.RadioButton1.Size = New System.Drawing.Size(45, 28)
+        Me.RadioButton1.TabIndex = 42
+        Me.RadioButton1.TabStop = True
+        Me.RadioButton1.Text = "A"
+        Me.RadioButton1.UseVisualStyleBackColor = True
+        '
+        'RadioButton2
+        '
+        Me.RadioButton2.AutoSize = True
+        Me.RadioButton2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadioButton2.Location = New System.Drawing.Point(331, 452)
+        Me.RadioButton2.Name = "RadioButton2"
+        Me.RadioButton2.Size = New System.Drawing.Size(44, 28)
+        Me.RadioButton2.TabIndex = 43
+        Me.RadioButton2.TabStop = True
+        Me.RadioButton2.Text = "B"
+        Me.RadioButton2.UseVisualStyleBackColor = True
+        '
+        'RadioButton3
+        '
+        Me.RadioButton3.AutoSize = True
+        Me.RadioButton3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadioButton3.Location = New System.Drawing.Point(394, 451)
+        Me.RadioButton3.Name = "RadioButton3"
+        Me.RadioButton3.Size = New System.Drawing.Size(45, 28)
+        Me.RadioButton3.TabIndex = 44
+        Me.RadioButton3.TabStop = True
+        Me.RadioButton3.Text = "C"
+        Me.RadioButton3.UseVisualStyleBackColor = True
+        '
+        'RadioButton4
+        '
+        Me.RadioButton4.AutoSize = True
+        Me.RadioButton4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RadioButton4.Location = New System.Drawing.Point(457, 452)
+        Me.RadioButton4.Name = "RadioButton4"
+        Me.RadioButton4.Size = New System.Drawing.Size(45, 28)
+        Me.RadioButton4.TabIndex = 45
+        Me.RadioButton4.TabStop = True
+        Me.RadioButton4.Text = "D"
+        Me.RadioButton4.UseVisualStyleBackColor = True
         '
         'FirstEdit
         '

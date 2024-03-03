@@ -143,35 +143,35 @@ Public Class LandingPage
             If userExists = True And validEmail = True Then
                 MessageBox.Show("Admin Validated!", "info", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 'to check if the admin entered for the first time or not
-                'Try
-                '    Dim entered As Boolean = False
-                '    connection.Open()
-                '    Dim query As String = "select entered from admin"
-                '    Using cmd As New OdbcCommand(query, connection)
-                '        Dim reader As OdbcDataReader = cmd.ExecuteReader()
-                '        If reader.Read() Then
-                '            entered = Convert.ToBoolean(reader("entered"))
-                '        End If
-                '    End Using
-                '    If entered = True Then
-                '        Dim otherOpen As New otherOpen()
-                '        otherOpen.Show()
-                '        Me.Hide()
-                '    Else
-                '        'update the entry
-                '        query = "update admin set entered=?"
-                '        Using cmd As New OdbcCommand(query, connection)
-                '            cmd.Parameters.AddWithValue("?", 1)
-                '            cmd.ExecuteNonQuery()
-                '        End Using
-                '        Dim firstOpen As New firstOpen()
-                '        firstOpen.Show()
-                '        Me.Hide()
-                '    End If
-                'Catch ex As Exception
-                'Finally
-                '    connection.Close()
-                'End Try
+                Try
+                    Dim entered As Boolean = False
+                    connection.Open()
+                    Dim query As String = "select entered from admin"
+                    Using cmd As New OdbcCommand(query, connection)
+                        Dim reader As OdbcDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            entered = Convert.ToBoolean(reader("entered"))
+                        End If
+                    End Using
+                    If entered = True Then
+                        Dim otherOpen As New otherOpen()
+                        otherOpen.Show()
+                        Me.Hide()
+                    Else
+                        'update the entry
+                        query = "update admin set entered=?"
+                        Using cmd As New OdbcCommand(query, connection)
+                            cmd.Parameters.AddWithValue("?", 1)
+                            cmd.ExecuteNonQuery()
+                        End Using
+                        Dim firstOpen As New firstOpen()
+                        firstOpen.Show()
+                        Me.Hide()
+                    End If
+                Catch ex As Exception
+                Finally
+                    connection.Close()
+                End Try
             Else
                 MessageBox.Show("Invalid Credentials", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If

@@ -12,7 +12,6 @@ C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-Syste
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.pdb
 <<<<<<< Updated upstream
 =======
-C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.Certificate.resources
 C:\Users\navad\OneDrive\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.exe
 C:\Users\navad\OneDrive\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.xml
 C:\Users\navad\OneDrive\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.pdb
@@ -24,9 +23,6 @@ C:\Users\navad\OneDrive\Desktop\Online-Examination-System\Online Examination Sys
 C:\Users\navad\OneDrive\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.Resources.resources
 C:\Users\navad\OneDrive\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.student_profile.resources
 C:\Users\navad\OneDrive\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.vbproj.GenerateResource.Cache
-C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.LandingPage.resources
-C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.ExamForm.resources
-C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.StudentLandingPage.resources
 C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.exe
 C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.xml
 C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.pdb
@@ -52,3 +48,9 @@ C:\Users\koush\Desktop\old\Online-Examination-System\Online Examination System\O
 C:\Users\koush\Desktop\old\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.StudentLandingPage.resources
 C:\Users\koush\Desktop\old\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online Examination System.vbproj.GenerateResource.Cache
 >>>>>>> Stashed changes
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.AddQuestions.resources
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.FirstEdit.resources
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.firstOpen.resources
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.otherOpen.resources
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.QuestionPool.resources
+C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.Results.resources

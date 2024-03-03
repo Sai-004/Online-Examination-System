@@ -72,6 +72,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddQuestions.Designer.vb">
+      <DependentUpon>AddQuestions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="AddQuestions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="certificate.Designer.vb">
       <DependentUpon>certificate.vb</DependentUpon>
     </Compile>
@@ -83,6 +89,18 @@
     </Compile>
     <Compile Include="ExamForm.Designer.vb">
       <DependentUpon>ExamForm.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FirstEdit.Designer.vb">
+      <DependentUpon>FirstEdit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FirstEdit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="firstOpen.Designer.vb">
+      <DependentUpon>firstOpen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="firstOpen.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LandingPage.Designer.vb">
@@ -106,6 +124,24 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="otherOpen.Designer.vb">
+      <DependentUpon>otherOpen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="otherOpen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuestionPool.Designer.vb">
+      <DependentUpon>QuestionPool.vb</DependentUpon>
+    </Compile>
+    <Compile Include="QuestionPool.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Results.Designer.vb">
+      <DependentUpon>Results.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Results.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="StudentLandingPage.Designer.vb">
       <DependentUpon>StudentLandingPage.vb</DependentUpon>
     </Compile>
@@ -114,11 +150,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AddQuestions.resx">
+      <DependentUpon>AddQuestions.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="certificate.resx">
       <DependentUpon>certificate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ExamForm.resx">
       <DependentUpon>ExamForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FirstEdit.resx">
+      <DependentUpon>FirstEdit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="firstOpen.resx">
+      <DependentUpon>firstOpen.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LandingPage.resx">
       <DependentUpon>LandingPage.vb</DependentUpon>
@@ -128,6 +173,15 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="otherOpen.resx">
+      <DependentUpon>otherOpen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuestionPool.resx">
+      <DependentUpon>QuestionPool.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Results.resx">
+      <DependentUpon>Results.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StudentLandingPage.resx">
       <DependentUpon>StudentLandingPage.vb</DependentUpon>
@@ -146,6 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\indian_institute_of_technology_guwahati_cover.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\campus.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
