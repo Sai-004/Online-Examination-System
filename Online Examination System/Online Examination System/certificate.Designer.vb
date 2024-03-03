@@ -125,7 +125,7 @@ Partial Class Certificate
         Me.Label1.TabIndex = 14
         Me.Label1.Text = "Certificate of Completion"
         '
-        'certificate
+        'Certificate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -138,7 +138,7 @@ Partial Class Certificate
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Name = "certificate"
+        Me.Name = "Certificate"
         Me.Text = "certificate"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

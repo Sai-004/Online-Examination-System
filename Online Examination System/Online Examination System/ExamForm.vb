@@ -321,10 +321,11 @@ Public Class Form
         ' Save the selected answers to the database
         SaveSelectedAnswersToDatabase()
 
-        ' Open a new form (if needed)
-        Dim newform As New student_profile()
+        ' Open a new instance of student_profile form with the roll number parameter
+        Dim newform As New student_profile(70) ' Pass the roll number here
         newform.Show()
     End Sub
+
 
     ' Method to save selected answers to the database
     Private Sub SaveSelectedAnswersToDatabase()
@@ -336,7 +337,21 @@ Public Class Form
                 For Each entry As KeyValuePair(Of KeyValuePair(Of Integer, Integer), Integer) In MarkedAnswers
                     Dim section_id As Integer = entry.Key.Value
                     Dim question_id As Integer = entry.Key.Key
-                    Dim selected_answer As Integer = entry.Value
+
+                    Dim selected_answer_int As Integer = entry.Value
+                    Dim selected_answer As String
+                    Select Case selected_answer_int
+                        Case 1
+                            selected_answer = "Option A"
+                        Case 2
+                            selected_answer = "Option B"
+                        Case 3
+                            selected_answer = "Option C"
+                        Case 4
+                            selected_answer = "Option D"
+                        Case Else
+                            selected_answer = "-1"
+                    End Select
 
                     Dim query As String = "INSERT INTO student_answers (roll_number, section_id, question_id, selected_answer) VALUES (?, ?, ?, ?)"
                     Using command As New OdbcCommand(query, connection)
