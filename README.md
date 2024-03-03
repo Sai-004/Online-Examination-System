@@ -1,33 +1,86 @@
-# Online-Examination-System
-CS-346 Assignment-2 Online Examination System
-## All Required pages
-1.Login page for admin and student(2 or 3 pages).  
-2.Student exam interface with timer.  
-3.Student result pages(one waiting and other showing results and option to generate certificate).  
-4.Admin when entered for the first time,asking him the exam pattern.  
-5.Admin when entered not the first time,asking him whether he wants to do question pool management or view student results or release the test results of students whose results weren't released.  
-6.Students results page for Admin.  
-7.Question Pool management (2 or 3 pages for add,delete ,edit).  
+### CS-346 Assignment-2 
+# Online Examination System
+
+## Overview
+
+The Online Examination System is a Visual Basic Forms application developed using Visual Studio. Its primary purpose is to facilitate online examinations for students under the supervision of an administrator. The system comprises several pages and features to manage exams effectively.
+
+## Features
+
+### 1. User Authentication
+
+- **Landing Page:** Users are directed to the landing page where they can log in as an administrator or a student.
+- **Admin Landing Page:** Upon successful login, admins are redirected to their dashboard where they can manage exam-related tasks.
+- **Student Landing Page:** Students are directed to their dashboard where they can access exams and view their results.
+
+### 2. Admin Functions
+
+- **Question Pool Management:** Admins can add, edit, or delete questions in the question pool.
+- **Admin Results Page:** Provides admins with access to view student results.
+- **Release Results Option:** Admins can release exam results to students.
+
+### 3. Student Functions
+
+- **Student Exam Panel:** Students can access the exam interface to take exams.
+- **Student Results Page:** After completing an exam, students can view their results.
+
+### 4. Database Connectivity
+
+- The database is hosted on an Apache server in PHPMyAdmin.
+- All data manipulation and retrieval are done through SQL queries from the Visual Basic Forms application.
+
+### 5. Multi-Device Compatibility
+
+- The application is designed to run on multiple devices, ensuring accessibility for both admins and students.
+
+### 6. Error Handling and Restrictions
+
+- **Concurrent User Handling:** If two users log in with the same credentials simultaneously, the latest user will receive an error message, ensuring data integrity.
+- **Admin Limitations:** Admin functionalities such as test pattern finalization and question addition/modification have specific limitations to maintain test integrity.
+- **Test Timer:** A timer is set for each student during exams, ensuring exams are completed within the allocated time.
+
+## Usage
+
+1. **Login:** Users log in as either an administrator or a student.
+2. **Admin Functions:** Admins manage exams, question pools, and result release.
+3. **Student Functions:** Students take exams and view results.
+4. **Database Connection:** Ensure the application is connected to the MySQL database hosted on PHPMyAdmin.
+5. **Error Handling:** Follow prompts and error messages to ensure smooth operation.
+
+## Conclusion
+
+The Online Examination System provides a comprehensive platform for administering online exams securely and efficiently. With features tailored for both administrators and students, the system ensures seamless exam management and a user-friendly experience. For any queries or issues, please contact the system administrator.
+
 ## To Connect to the database  
-1.The database is hosted on xampp server in lab PC.So, you must connect to intranet to access the database.  
-2.Enter 172.16.114.214 to access the xampp server.Navigate to phpmyadmin after this.  
-3.The currently using database is schema is 'onlineexaminationsystem'.All tables created and manipulated are visible here.  
+1. The database is hosted on Xampp server in a lab PC. So, you must connect to intranet to access the database.  
+2. Enter `172.16.114.214` to access the Xampp server. Navigate to phpmyadmin after this.  
+3. The currently using database is schema is `onlineexaminationsystem`. All tables created and manipulated are visible here.  
 
-## To connect visual basic application to the above hosted database(as admin)  
-//add connection string for student here later  
-0.Install odbc mysql driver 32bit from [here](https://dev.mysql.com/downloads/connector/odbc/) (select version 8.0.36)  
-    If the above exe file doesn't run, you might have to install visualstudio 2019 redistributable from [here](https://aka.ms/vs/17/release/vc_redist.x86.exe)  
-    Run this appliaction as administrator.Navigate to systemDSN, add a connection(choose mysql driver ANSI) .Give DSN name as oee,Username as user123,password as 1234.Choose the database "onlineexaminationsystem".  
-    This will create the necessary connection,which can be used through our visual basic application. 
+## Connecting Visual Basic Application to Hosted Database
 
-    
-1.The below is the code to insert into some table  
+To establish a connection between the Visual Basic application and the hosted database (for the admin), follow these steps:
+
+### Prerequisites
+1. **Install ODBC MySQL Driver:** Download and install the 32-bit ODBC MySQL driver from [here](https://dev.mysql.com/downloads/connector/odbc/) (choose version 8.0.36).
+   
+   If the installer doesn't run, install the Visual Studio 2019 redistributable from [here](https://aka.ms/vs/17/release/vc_redist.x86.exe).
+
+2. **Run as Administrator:** Run the application as an administrator.
+
+### Creating System DSN
+1. **Navigate to System DSN:** Open the ODBC Data Source Administrator. Add a system DSN by choosing MySQL ANSI driver.
+   
+2. **Configure Connection:** Set DSN name, username as `user123`, and password as `1234`. Select the database `onlineexaminationsystem`.
+
+### Code Samples
+
+#### Inserting Data into Table
 ```vb
-Dim connString as String = "DSN=oee;Uid=user123;Pwd=1234;"
+Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
 Dim conn As New OdbcConnection(connString)
 Try
-    conn.open()
-    Dim insertQuery As String = "insert into minimum_number_of_questions(section_id,no_qs) values (?,?) "
+    conn.Open()
+    Dim insertQuery As String = "INSERT INTO minimum_number_of_questions(section_id, no_qs) VALUES (?, ?)"
     For i As Integer = 1 To numberOfSections Step 1
       Using cmdInsert As New OdbcCommand(insertQuery, conn)
           cmdInsert.Parameters.AddWithValue("@section_id", i)
@@ -36,76 +89,73 @@ Try
           cmdInsert.Parameters.Clear()
       End Using
     Next
-catch ex as Exception
+Catch ex As Exception
 Finally
-    conn.close()
+    conn.Close()
 End Try
 ```
 
-
-2.The below is code to read from the table and store in variables created in visual basic
+#### Reading Data from Table
 ```vb
-Dim connString as String = "DSN=oee;Uid=user123;Pwd=1234;"
+Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234;"
 Try
-            conn.Open()
-            Dim query As String = "SELECT question_id,section_id,question,answer,option1,option2,option3,option4 FROM question_pool where section_id= ? and question_id = ? "
-            Dim cmd As New OdbcCommand(query, conn)
-            cmd.Parameters.AddWithValue("@section_id", section_id)
-            cmd.Parameters.AddWithValue("@question_id", question_id)
-            ' Execute the query
-            Dim reader As OdbcDataReader = cmd.ExecuteReader()
-            'here reader reads the row if exists and stores the results into separate strings to be stored into rich text boxes
-            If reader.HasRows Then
-                ' Read the first row
-                reader.Read()
-
-                ' Retrieve the values as strings
-                Dim questionText As String = reader("question").ToString()
-                Dim optionA As String = reader("option1").ToString()
-                Dim optionB As String = reader("option2").ToString()
-                Dim optionC As String = reader("option3").ToString()
-                Dim optionD As String = reader("option4").ToString()
-                Dim correctOption As String = reader("answer").ToString()
-            Else
-                MessageBox.Show("No data found for the given section ID and question ID.")
-            End If
-            reader.Close()
-        Catch ex As Exception
-            MessageBox.Show("Error connecting to database", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            conn.Close()
-        End Try
+    conn.Open()
+    Dim query As String = "SELECT question_id, section_id, question, answer, option1, option2, option3, option4 FROM question_pool WHERE section_id = ? AND question_id = ?"
+    Dim cmd As New OdbcCommand(query, conn)
+    cmd.Parameters.AddWithValue("@section_id", section_id)
+    cmd.Parameters.AddWithValue("@question_id", question_id)
+    Dim reader As OdbcDataReader = cmd.ExecuteReader()
+    If reader.HasRows Then
+        reader.Read()
+        Dim questionText As String = reader("question").ToString()
+        Dim optionA As String = reader("option1").ToString()
+        ' Retrieve other values similarly
+    Else
+        MessageBox.Show("No data found for the given section ID and question ID.")
+    End If
+    reader.Close()
+Catch ex As Exception
+Finally
+    conn.Close()
+End Try
 ```
-3.Sample update query
+
+#### Updating Data
 ```vb
 Try
     conn.Open()
     Dim updateQuery As String = "UPDATE admin SET sections = ? WHERE admin_id = 1"
     Using cmdUpdate As New OdbcCommand(updateQuery, conn)
-        ' Set parameter for the new value of sections
         cmdUpdate.Parameters.AddWithValue("@sections", numberOfSections)
-        ' Execute the UPDATE query
         cmdUpdate.ExecuteNonQuery()
     End Using
-Catch ex as Exception
+Catch ex As Exception
 
 Finally
     conn.Close()
 End Try
 ```
-4.Sample delete query
+
+#### Deleting Data
 ```vb
 Try
     conn.Open()
-    Dim deleteQuery As String = "delete from section"
+    Dim deleteQuery As String = "DELETE FROM section"
     Using cmdDelete As New OdbcCommand(deleteQuery, conn)
         cmdDelete.ExecuteNonQuery()
     End Using
-Catch ex as Exception
+Catch ex As Exception
 
 Finally
     conn.Close()
 End Try
 ```
-## Properties of the above software
-Built using visual basic in visual studio 2010.
+
+## Software Properties
+- **Built Using:** Visual Basic in Visual Studio 2010.
+- **Database:** MySQL database hosted in Apache server using phpMyAdmin.
+- **Compatibility:** Application runs on multiple devices.
+- **Concurrency Handling:** Ensures error messages for simultaneous user logins and prevents multiple admin addition or modification.
+- **Admin Control:** Provides exclusive admin access to test pattern and questions, ensuring proper configuration before student access.
+- **User Experience:** Timer-based exam control prevents exam restarts and releases results only upon admin authorization.
+- **Error Handling:** Displays appropriate error messages for database connectivity issues or invalid user actions.
