@@ -24,6 +24,8 @@ Public Class ExamForm
     Private currentSectionId As Integer = -1    ' To track the current section ID
     Private selectedAns As Integer = -1         ' To save the selected answer
 
+    Private verticalLinePanel As Panel ' Declare verticalLinePanel as a member variable
+
     Private Sub Form_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
         LoadSectionsFromDatabase()
 
@@ -32,7 +34,27 @@ Public Class ExamForm
         currentSectionId = 1
         DisplayQuestionText(1, 1)
         DisplayOptions(1, 1)
+        ' Create a Panel control for the vertical line
+        verticalLinePanel = New Panel()
+        With verticalLinePanel
+            .BackColor = Color.Black ' Or any color you prefer
+            .Width = 2 ' Or adjust to desired thickness
+            .Dock = DockStyle.Right
+        End With
+
+        ' Add the vertical line panel to SplitContainer1.Panel1
+        SplitContainer1.Panel1.Controls.Add(verticalLinePanel)
+
+        ' Subscribe to the Resize event of the form or SplitContainer1
+        AddHandler SplitContainer1.Resize, AddressOf UpdateVerticalLineHeight
     End Sub
+
+    Private Sub UpdateVerticalLineHeight(ByVal sender As Object, ByVal e As EventArgs)
+        ' Update the height of the vertical line panel to match the height of the form or SplitContainer1
+        verticalLinePanel.Height = SplitContainer1.Height ' Or Me.Height if resizing with respect to the form
+    End Sub
+
+  
 
     Private Sub LoadSectionsFromDatabase()
         Using connection As New OdbcConnection(connectionString)
@@ -290,7 +312,7 @@ Public Class ExamForm
                 ' Open a new instance of student_profile form with the roll number parameter
                 Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
                 newform.Show()
-                Me.WindowState = FormWindowState.Minimized
+                Me.Close()
                 timer_count.Enabled = False
                 temp = temp + 1
                 ' MessageBox.Show("Time Ended")
@@ -358,7 +380,7 @@ Public Class ExamForm
             ' Open a new instance of student_profile form with the roll number parameter
             Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
             newform.Show()
-            Me.WindowState = FormWindowState.Minimized
+            Me.Close()
             temp = temp + 1
         End If
         ' Me.Close()
