@@ -119,6 +119,7 @@ Public Class LandingPage
             connection.Close()
         End Try
     End Sub
+
     'to validate the email
     Private Function ValidateEmail(ByVal email As String) As Boolean
         Dim pattern As String = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
@@ -126,6 +127,7 @@ Public Class LandingPage
         Dim isMatch As Boolean = regex.IsMatch(email)
         Return isMatch
     End Function
+
     Private Sub SignIn_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SignInBtn.Click
         Dim Name As String
         Dim RollNumber As String
@@ -244,5 +246,4 @@ Public Class LandingPage
     Private Sub Panel2_Paint(ByVal sender As System.Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles Panel2.Paint
         Panel1.BackColor = Color.FromArgb(200, 255, 255, 255)
     End Sub
-
 End Class

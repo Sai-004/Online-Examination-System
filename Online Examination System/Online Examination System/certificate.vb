@@ -119,7 +119,7 @@ Public Class Certificate
         Try
             connection.Open()
             ' Query to retrieve student rank
-            Dim query As String = "SELECT r.roll_number as roll_number, DENSE_RANK() OVER (ORDER BY marks DESC) AS Rank FROM results r JOIN student s ON r.roll_number = s.roll_number WHERE r.roll_number = ?"
+            Dim query As String = "SELECT roll_number, (SELECT COUNT(*) + 1 FROM results AS r2 WHERE r2.percentile > r1.percentile) AS rank FROM results AS r1 WHERE roll_number = ?"
             Using command As New OdbcCommand(query, connection)
                 command.Parameters.AddWithValue("?", rollNumber)
 
@@ -127,7 +127,7 @@ Public Class Certificate
                 Dim reader As OdbcDataReader = command.ExecuteReader()
 
                 If reader.Read() Then
-                    MessageBox.Show(reader("Rank"))
+                    ' MessageBox.Show(reader("Rank"))
                     ranklabel.Text = "RANK: " & reader("Rank").ToString()
                 End If
             End Using
@@ -136,7 +136,7 @@ Public Class Certificate
         Finally
             connection.Close()
         End Try
-        
+
     End Sub
 
 End Class
