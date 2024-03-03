@@ -85,22 +85,16 @@
     <Compile Include="otherOpen.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FirstEdit.Designer.vb">
-      <DependentUpon>FirstEdit.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FirstEdit.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="QuestionPool.Designer.vb">
       <DependentUpon>QuestionPool.vb</DependentUpon>
     </Compile>
     <Compile Include="QuestionPool.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Results.Designer.vb">
-      <DependentUpon>Results.vb</DependentUpon>
+    <Compile Include="FirstEdit.Designer.vb">
+      <DependentUpon>FirstEdit.vb</DependentUpon>
     </Compile>
-    <Compile Include="Results.vb">
+    <Compile Include="FirstEdit.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddQuestions.Designer.vb">
@@ -124,6 +118,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Results.Designer.vb">
+      <DependentUpon>Results.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Results.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="firstOpen.resx">
@@ -132,14 +132,11 @@
     <EmbeddedResource Include="otherOpen.resx">
       <DependentUpon>otherOpen.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FirstEdit.resx">
-      <DependentUpon>FirstEdit.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="QuestionPool.resx">
       <DependentUpon>QuestionPool.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Results.resx">
-      <DependentUpon>Results.vb</DependentUpon>
+    <EmbeddedResource Include="FirstEdit.resx">
+      <DependentUpon>FirstEdit.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddQuestions.resx">
       <DependentUpon>AddQuestions.vb</DependentUpon>
@@ -149,6 +146,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Results.resx">
+      <DependentUpon>Results.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

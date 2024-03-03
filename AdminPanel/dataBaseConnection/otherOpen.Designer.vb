@@ -43,19 +43,19 @@ Partial Class otherOpen
         Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button2.Location = New System.Drawing.Point(12, 64)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(284, 70)
+        Me.Button2.Size = New System.Drawing.Size(284, 61)
         Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Check the scores of students whose results are calculated"
+        Me.Button2.Text = "Test Evaluation and Check the scores of students "
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'Form2
+        'otherOpen
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(310, 147)
+        Me.ClientSize = New System.Drawing.Size(314, 147)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
-        Me.Name = "Form2"
+        Me.Name = "otherOpen"
         Me.Text = "Form2"
         Me.ResumeLayout(False)
 
