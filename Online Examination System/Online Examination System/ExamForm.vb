@@ -312,7 +312,7 @@ Public Class ExamForm
                 ' Open a new instance of student_profile form with the roll number parameter
                 Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
                 newform.Show()
-                Me.WindowState = FormWindowState.Minimized
+                Me.Close()
                 timer_count.Enabled = False
                 temp = temp + 1
                 ' MessageBox.Show("Time Ended")
@@ -380,7 +380,7 @@ Public Class ExamForm
             ' Open a new instance of student_profile form with the roll number parameter
             Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
             newform.Show()
-            Me.WindowState = FormWindowState.Minimized
+            Me.Close()
             temp = temp + 1
         End If
         ' Me.Close()
@@ -427,6 +427,4 @@ Public Class ExamForm
             End Try
         End Using
     End Sub
-
-
 End Class

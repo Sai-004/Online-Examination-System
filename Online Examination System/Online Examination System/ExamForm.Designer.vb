@@ -117,8 +117,9 @@ Partial Class ExamForm
         '
         Me.SubmitBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SubmitBtn.BackColor = System.Drawing.Color.LightSeaGreen
-        Me.SubmitBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SubmitBtn.Location = New System.Drawing.Point(666, 468)
+        Me.SubmitBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SubmitBtn.ForeColor = System.Drawing.Color.White
+        Me.SubmitBtn.Location = New System.Drawing.Point(675, 468)
         Me.SubmitBtn.Name = "SubmitBtn"
         Me.SubmitBtn.Size = New System.Drawing.Size(127, 42)
         Me.SubmitBtn.TabIndex = 3
@@ -129,10 +130,11 @@ Partial Class ExamForm
         '
         Me.SaveBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.SaveBtn.BackColor = System.Drawing.Color.LimeGreen
-        Me.SaveBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SaveBtn.Location = New System.Drawing.Point(454, 468)
+        Me.SaveBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SaveBtn.ForeColor = System.Drawing.Color.White
+        Me.SaveBtn.Location = New System.Drawing.Point(435, 468)
         Me.SaveBtn.Name = "SaveBtn"
-        Me.SaveBtn.Size = New System.Drawing.Size(139, 42)
+        Me.SaveBtn.Size = New System.Drawing.Size(166, 42)
         Me.SaveBtn.TabIndex = 2
         Me.SaveBtn.Text = "Save and Next"
         Me.SaveBtn.UseVisualStyleBackColor = False
@@ -151,10 +153,11 @@ Partial Class ExamForm
         '
         Me.ReviewBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ReviewBtn.BackColor = System.Drawing.Color.Violet
-        Me.ReviewBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ReviewBtn.Location = New System.Drawing.Point(250, 468)
+        Me.ReviewBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ReviewBtn.ForeColor = System.Drawing.Color.White
+        Me.ReviewBtn.Location = New System.Drawing.Point(240, 468)
         Me.ReviewBtn.Name = "ReviewBtn"
-        Me.ReviewBtn.Size = New System.Drawing.Size(156, 42)
+        Me.ReviewBtn.Size = New System.Drawing.Size(189, 42)
         Me.ReviewBtn.TabIndex = 1
         Me.ReviewBtn.Text = "Mark for review"
         Me.ReviewBtn.UseVisualStyleBackColor = False
@@ -163,10 +166,11 @@ Partial Class ExamForm
         '
         Me.PrevBtn.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PrevBtn.BackColor = System.Drawing.Color.Orange
-        Me.PrevBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PrevBtn.Location = New System.Drawing.Point(79, 468)
+        Me.PrevBtn.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PrevBtn.ForeColor = System.Drawing.Color.White
+        Me.PrevBtn.Location = New System.Drawing.Point(68, 468)
         Me.PrevBtn.Name = "PrevBtn"
-        Me.PrevBtn.Size = New System.Drawing.Size(142, 42)
+        Me.PrevBtn.Size = New System.Drawing.Size(166, 42)
         Me.PrevBtn.TabIndex = 0
         Me.PrevBtn.Text = "Previous"
         Me.PrevBtn.UseVisualStyleBackColor = False
@@ -232,10 +236,11 @@ Partial Class ExamForm
         '
         Me.Label3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(1043, 11)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.Black
+        Me.Label3.Location = New System.Drawing.Point(1032, 11)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(97, 25)
+        Me.Label3.Size = New System.Drawing.Size(108, 25)
         Me.Label3.TabIndex = 12
         Me.Label3.Text = "Time left: "
         '
@@ -243,10 +248,11 @@ Partial Class ExamForm
         '
         Me.timer_count.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.timer_count.AutoSize = True
-        Me.timer_count.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.timer_count.Location = New System.Drawing.Point(1151, 11)
+        Me.timer_count.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.timer_count.ForeColor = System.Drawing.Color.Red
+        Me.timer_count.Location = New System.Drawing.Point(1146, 11)
         Me.timer_count.Name = "timer_count"
-        Me.timer_count.Size = New System.Drawing.Size(62, 25)
+        Me.timer_count.Size = New System.Drawing.Size(67, 25)
         Me.timer_count.TabIndex = 11
         Me.timer_count.Text = "00:00"
         '
