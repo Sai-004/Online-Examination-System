@@ -146,6 +146,7 @@ Partial Class StudentLandingPage
         Me.waitResults_tb.Location = New System.Drawing.Point(83, 302)
         Me.waitResults_tb.Multiline = True
         Me.waitResults_tb.Name = "waitResults_tb"
+        Me.waitResults_tb.ReadOnly = True
         Me.waitResults_tb.Size = New System.Drawing.Size(326, 132)
         Me.waitResults_tb.TabIndex = 68
         Me.waitResults_tb.Text = "" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Please wait for Admin " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "to release the Results" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
