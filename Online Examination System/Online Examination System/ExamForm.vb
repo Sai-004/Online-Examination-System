@@ -334,6 +334,7 @@ Public Class ExamForm
                 Finally
                     conn.Close()
                 End Try
+                MessageBox.Show("The time has ended. Press OK to submit.", "Test Ended", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 ' Open a new instance of student_profile form with the roll number parameter
                 Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
                 Try
@@ -341,6 +342,7 @@ Public Class ExamForm
                 Catch ex As Exception
                     'MessageBox.Show(ex.Message.ToString())
                 End Try
+
                 Me.Close()
                 timer_count.Enabled = False
                 temp = temp + 1
@@ -417,6 +419,7 @@ Public Class ExamForm
         ' Save the selected answers to the database
         If temp = 0 Then
             SaveSelectedAnswersToDatabase()
+            MessageBox.Show("Are you sure to submit?. Press OK to continue.", "Test Ended", MessageBoxButtons.OK, MessageBoxIcon.Information)
             ' Open a new instance of student_profile form with the roll number parameter
             Dim newform As New StudentLandingPage(rollNumber) ' Pass the roll number here
             newform.Show()
