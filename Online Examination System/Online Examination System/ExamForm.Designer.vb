@@ -110,6 +110,8 @@ Partial Class ExamForm
         Me.question_text.Location = New System.Drawing.Point(68, 33)
         Me.question_text.Multiline = True
         Me.question_text.Name = "question_text"
+        Me.question_text.ReadOnly = True
+        Me.question_text.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.question_text.Size = New System.Drawing.Size(721, 74)
         Me.question_text.TabIndex = 4
         '
