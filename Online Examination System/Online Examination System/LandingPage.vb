@@ -6,7 +6,13 @@ Imports System.Text.RegularExpressions
 Public Class LandingPage
     Dim connString As String = "DSN=oee;Uid=user123;Pwd=1234"
     Dim connection As New OdbcConnection(connString)
+    Private Sub txtPassword_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles Textbox3.TextChanged
+        ' Set the PasswordChar property to hide the entered characters
+        If Label3.Text = "Password" Then
+            Textbox3.PasswordChar = "*"
+        End If
 
+    End Sub
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles userSignin.Click
         Panel2.Visible = True
         Title.Text = "Student Sign In"
@@ -19,6 +25,7 @@ Public Class LandingPage
         Textbox3.Visible = True
         Label3.Text = "Password"
         Textbox4.Visible = False
+        'Textbox4.PasswordChar = "*"c
         Label4.Visible = False
         SignInBtn.Text = "Sign In"
         newuser.Visible = True
@@ -37,6 +44,7 @@ Public Class LandingPage
         Textbox3.Visible = True
         Label3.Text = "Password"
         Textbox4.Visible = False
+        'Textbox4.PasswordChar = "*"c
         Label4.Visible = False
         SignInBtn.Text = "Login"
         newuser.Visible = False
@@ -57,6 +65,10 @@ Public Class LandingPage
         Textbox3.Visible = True
         Label4.Text = "Password"
         Textbox4.Visible = True
+        Textbox1.PasswordChar = ControlChars.NullChar
+        Textbox2.PasswordChar = ControlChars.NullChar
+        Textbox3.PasswordChar = ControlChars.NullChar
+        Textbox4.PasswordChar = ControlChars.NullChar
         Label4.Visible = True
         SignInBtn.Text = "Sign Up"
         newuser.Visible = False

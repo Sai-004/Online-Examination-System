@@ -54,3 +54,9 @@ C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-Syste
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.otherOpen.resources
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.QuestionPool.resources
 C:\Users\mssri\Desktop\books\CS345 Software Engineering\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.Results.resources
+C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.AddQuestions.resources
+C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.FirstEdit.resources
+C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.firstOpen.resources
+C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.otherOpen.resources
+C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.QuestionPool.resources
+C:\Users\koush\Desktop\Online-Examination-System\Online Examination System\Online Examination System\obj\x86\Debug\Online_Examination_System.Results.resources
