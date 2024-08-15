@@ -158,8 +158,4 @@ End Try
 - **Concurrency Handling:** Ensures error messages for simultaneous user logins and prevents multiple admin addition or modification.
 - **Admin Control:** Provides exclusive admin access to test pattern and questions, ensuring proper configuration before student access.
 - **User Experience:** Timer-based exam control prevents exam restarts and releases results only upon admin authorization.
-<<<<<<< Updated upstream
 - **Error Handling:** Displays appropriate error messages for database connectivity issues or invalid user actions.
-=======
-- **Error Handling:** Displays appropriate error messages for database connectivity issues or invalid user actions.
->>>>>>> Stashed changes
